@@ -11,9 +11,9 @@ public class HtmlColor {
      */
     public HtmlColor()
     {
-        //this.red   = 0;
-        //this.green = 0;
-        //this.blue  = 0;
+        this.red   = 0;
+        this.green = 0;
+        this.blue  = 0;
     }
 
     /**
@@ -33,7 +33,7 @@ public class HtmlColor {
      */
     public int getRed()
     {
-        return -1;
+        return this.red;
     }
 
     /**
@@ -45,7 +45,7 @@ public class HtmlColor {
      */
     public void setRed(int v)
     {
-
+        this.red = v;
     }
 
     /**
@@ -53,7 +53,7 @@ public class HtmlColor {
      */
     public int getGreen()
     {
-        return -1;
+        return this.green;
     }
 
     /**
@@ -73,7 +73,7 @@ public class HtmlColor {
      */
     public int getBlue()
     {
-        return -1;
+        return this.blue;
     }
 
     /**
@@ -93,7 +93,9 @@ public class HtmlColor {
      */
     public int hashCode()
     {
-        return 0;
+        return (2 * this.red) 
+             + (4 * this.green)
+             + (8 * this.blue);
     }
 
 }

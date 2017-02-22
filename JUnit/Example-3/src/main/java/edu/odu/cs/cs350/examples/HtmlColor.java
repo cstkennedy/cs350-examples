@@ -11,9 +11,9 @@ public class HtmlColor {
      */
     public HtmlColor()
     {
-        //this.red   = 0;
-        //this.green = 0;
-        //this.blue  = 0;
+        this.red   = 0;
+        this.green = 0;
+        this.blue  = 0;
     }
 
     /**
@@ -25,7 +25,9 @@ public class HtmlColor {
      */
     public HtmlColor(int r, int g, int b)
     {
-        
+        this.red   = r;
+        this.green = g;
+        this.blue  = b;
     }
 
     /**
@@ -33,7 +35,7 @@ public class HtmlColor {
      */
     public int getRed()
     {
-        return -1;
+        return this.red;
     }
 
     /**
@@ -45,7 +47,7 @@ public class HtmlColor {
      */
     public void setRed(int v)
     {
-
+        this.red = v;
     }
 
     /**
@@ -53,7 +55,7 @@ public class HtmlColor {
      */
     public int getGreen()
     {
-        return -1;
+        return this.green;
     }
 
     /**
@@ -65,7 +67,7 @@ public class HtmlColor {
      */
     public void setGreen(int v)
     {
-        
+        this.green = v;
     }
 
     /**
@@ -73,7 +75,7 @@ public class HtmlColor {
      */
     public int getBlue()
     {
-        return -1;
+        return this.blue;
     }
 
     /**
@@ -85,15 +87,23 @@ public class HtmlColor {
      */
     public void setBlue(int v)
     {
-        
+        this.blue = v;
     }
 
     /**
-     * Return a hascode
+     * Return a hashcode
      */
     public int hashCode()
     {
-        return 0;
+        return (2 * this.red) 
+             + (4 * this.green)
+             + (8 * this.blue);
+    }
+
+    @Override
+    public HtmlColor clone()
+    {
+        return new HtmlColor(this.red, this.green, this.blue);
     }
 
 }
