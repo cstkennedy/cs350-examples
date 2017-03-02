@@ -18,9 +18,18 @@ public class TestHtmlColor {
     {
         HtmlColor color = new HtmlColor();
 
-        color.setRed(100);
+        color.setRed(253);
 
-        assertEquals(color.getRed(), 100);
+        assertEquals(253, color.getRed());
+
+
+
+
+
+
+
+
+
         assertEquals(color.getBlue(), 0);
         assertEquals(color.getGreen(), 0);
     }
