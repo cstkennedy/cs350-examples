@@ -1,10 +1,10 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'org.ysb33r.gradle:doxygen:0.2'
-  }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.ysb33r.gradle:doxygen:0.2'
+    }
 }
 
 apply plugin: 'java'

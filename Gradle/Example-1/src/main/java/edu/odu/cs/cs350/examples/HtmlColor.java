@@ -25,7 +25,9 @@ public class HtmlColor {
      */
     public HtmlColor(int r, int g, int b)
     {
-        
+        this.red   = r;
+        this.green = g;
+        this.blue  = b;
     }
 
     /**
@@ -65,7 +67,7 @@ public class HtmlColor {
      */
     public void setGreen(int v)
     {
-        
+        this.green = v;
     }
 
     /**
@@ -85,7 +87,7 @@ public class HtmlColor {
      */
     public void setBlue(int v)
     {
-        
+        this.blue = v;
     }
 
     /**
@@ -96,6 +98,12 @@ public class HtmlColor {
         return (2 * this.red) 
              + (4 * this.green)
              + (8 * this.blue);
+    }
+
+    @Override
+    public HtmlColor clone()
+    {
+        return new HtmlColor(this.red, this.green, this.blue);
     }
 
 }

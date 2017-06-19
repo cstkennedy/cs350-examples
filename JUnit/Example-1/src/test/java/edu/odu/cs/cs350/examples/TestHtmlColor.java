@@ -21,17 +21,8 @@ public class TestHtmlColor {
         color.setRed(253);
 
         assertEquals(253, color.getRed());
-
-
-
-
-
-
-
-
-
-        assertEquals(color.getBlue(), 0);
-        assertEquals(color.getGreen(), 0);
+        assertEquals(0, color.getBlue());
+        assertEquals(0, color.getGreen());
     }
 
     @Test

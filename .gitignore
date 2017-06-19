@@ -8,3 +8,7 @@
 
 # Deploy Rules
 **.zip
+
+# Eclipse Project Rules
+**/.project
+**/.classpath

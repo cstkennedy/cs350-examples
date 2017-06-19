@@ -1,0 +1,15 @@
+
+    HTMLColor hColor = new HTMLColor(100, 110, 255);
+
+    /*
+        - red   -> 100
+        - green -> 110
+        - blue  -> 255
+
+        Object State - the collection of values for all attributes (data members) at a point in time
+    */
+
+    System.out.println("hColor.red   ->" + hColor.getRed());
+    System.out.println("hColor.green ->" + hColor.getGreen());
+    System.out.println("hColor.blue  ->" + hColor.getBlue());
+

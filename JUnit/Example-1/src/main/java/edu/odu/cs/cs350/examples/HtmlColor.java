@@ -89,7 +89,7 @@ public class HtmlColor {
     }
 
     /**
-     * Return a hascode
+     * Return a hashcode
      */
     public int hashCode()
     {
