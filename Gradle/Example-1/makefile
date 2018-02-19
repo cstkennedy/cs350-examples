@@ -12,6 +12,8 @@ docs:
 clean:
 	./gradlew --no-daemon clean
 	rm -rf .gradle
+	rm -rf .settings
+	rm .project .classpath
 
 
 	

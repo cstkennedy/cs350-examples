@@ -1,4 +1,3 @@
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
@@ -17,10 +16,9 @@ jar {
     baseName = 'HtmlColor'
 }
 
-
 test {
     testLogging {
-        events "passed","skipped", "failed", "standardOut", "standardError"
+        events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 
     reports {
