@@ -32,9 +32,9 @@ public class TestHtmlColor {
 
         color.setGreen(100);
 
-        assertEquals(color.getRed(), 0);
-        assertEquals(color.getBlue(), 0);
-        assertEquals(color.getGreen(), 100);
+        assertEquals(0, color.getRed());
+        assertEquals(0, color.getBlue());
+        assertEquals(100, color.getGreen());
     }
 
     @Test
@@ -44,9 +44,9 @@ public class TestHtmlColor {
 
         color.setBlue(100);
 
-        assertEquals(color.getRed(), 0);
-        assertEquals(color.getBlue(), 100);
-        assertEquals(color.getGreen(), 0);
+        assertEquals(0, color.getRed());
+        assertEquals(100, color.getBlue());
+        assertEquals(0, color.getGreen());
     }
 
     @Test
@@ -55,11 +55,11 @@ public class TestHtmlColor {
         HtmlColor color       = new HtmlColor();
         int       oldHashCode = color.hashCode();
 
-        color.setRed(100);
+        color.setRed(203);
 
-        assertEquals(color.getRed(), 100);
-        assertEquals(color.getBlue(), 0);
-        assertEquals(color.getGreen(), 0);
+        assertEquals(203, color.getRed());
+        assertEquals(0, color.getBlue());
+        assertEquals(0, color.getGreen());
 
         assertNotEquals(oldHashCode, color.hashCode());
     }

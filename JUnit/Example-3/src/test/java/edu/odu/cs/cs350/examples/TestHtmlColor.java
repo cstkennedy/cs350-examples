@@ -2,7 +2,6 @@ package edu.odu.cs.cs350.examples;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import junit.framework.TestCase;
 
 /**
  * 1 - Does this piece of code perform the operations 
@@ -13,33 +12,15 @@ import junit.framework.TestCase;
  * 
  * 1 Test per mutator
  */
-public class TestHtmlColor extends TestCase {
-    private HtmlColor black;
-    private HtmlColor white;
-    private HtmlColor red;
-    private HtmlColor green;
-    private HtmlColor blue;
-    private HtmlColor rColor;
-
-    @Override
-    protected void setUp()
-    {
-        black  = new HtmlColor();
-        white  = new HtmlColor(255, 255, 255);
-        red    = new HtmlColor(255, 0, 0);
-        green  = new HtmlColor(0, 255, 0);
-        blue   = new HtmlColor(0, 0, 255);
-        rColor = new HtmlColor(7, 62, 55);
-    }
-
+public class TestHtmlColor {
     @Test
     public void testSetRed()
     {
-        HtmlColor color = black.clone();
+        HtmlColor color = new HtmlColor();
 
-        color.setRed(100);
+        color.setRed(253);
 
-        assertEquals(100, color.getRed());
+        assertEquals(253, color.getRed());
         assertEquals(0, color.getBlue());
         assertEquals(0, color.getGreen());
     }
@@ -47,38 +28,39 @@ public class TestHtmlColor extends TestCase {
     @Test
     public void testSetGreen()
     {
-        HtmlColor color = blue.clone();
+        HtmlColor color = new HtmlColor();
 
         color.setGreen(100);
 
-        assertEquals(color.getRed(), 0);
-        assertEquals(color.getBlue(), 255);
-        assertEquals(color.getGreen(), 100);
+        assertEquals(0, color.getRed());
+        assertEquals(0, color.getBlue());
+        assertEquals(100, color.getGreen());
     }
 
     @Test
     public void testSetBlue()
     {
-        HtmlColor color = white.clone();
+        HtmlColor color = new HtmlColor();
 
         color.setBlue(100);
 
-        assertEquals(color.getRed(), 255);
-        assertEquals(color.getBlue(), 100);
-        assertEquals(color.getGreen(), 255);
+        assertEquals(0, color.getRed());
+        assertEquals(100, color.getBlue());
+        assertEquals(0, color.getGreen());
     }
 
     @Test
     public void testSetRedWithHashCode()
     {
-        HtmlColor color = black.clone();
+        HtmlColor color       = new HtmlColor();
+        int       oldHashCode = color.hashCode();
 
         color.setRed(100);
 
-        assertEquals(color.getRed(), 100);
-        assertEquals(color.getBlue(), 0);
-        assertEquals(color.getGreen(), 0);
+        assertEquals(100, color.getRed());
+        assertEquals(0, color.getBlue());
+        assertEquals(0, color.getGreen());
 
-        assertNotEquals(black.hashCode(), color.hashCode());
+        assertNotEquals(oldHashCode, color.hashCode());
     }
 }
