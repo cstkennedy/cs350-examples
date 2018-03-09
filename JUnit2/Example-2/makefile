@@ -1,4 +1,4 @@
-all: src docs
+all: deploy
 
 deploy: clean
 	echo "Gradle Based Example"
@@ -10,7 +10,7 @@ docs:
 	doxygen documentation.config
 
 clean:
-	./gradlew --no-daemon clean
+	./gradlew --no-daemon clean cleanEclipse
 	rm -rf .gradle
 
 

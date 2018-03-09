@@ -18,7 +18,7 @@ do
         pushd "$exampleDir" > /dev/null
 
         echo "$exampleDir -> Cleaning *.o, *.class, and binary files"
-        make clean &> /dev/null
+        make clean #&> /dev/null
         #echo "$exampleDir -> Building Doxygen Documentation"
         #make docs &> /dev/null
 
