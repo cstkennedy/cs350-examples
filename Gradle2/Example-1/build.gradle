@@ -29,7 +29,7 @@ dependencies {
 }
 
 jar {
-    baseName = "HtmlColor"
+    baseName = "RosterExample"
 }
 
 test {
