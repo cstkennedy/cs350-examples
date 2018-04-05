@@ -1,0 +1,49 @@
+stages:
+  - build
+  - deploy
+
+build-job:
+  tags:
+    # Use your group tag (e.g., green8) instead
+    # of runner cs350
+    - runner350
+  stage: build
+  script:
+    - chmod a+x gradlew
+    - ./gradlew --no-daemon build javadoc
+    - ./gradlew --no-daemon collectStats
+  only:
+    - master
+  artifacts:
+    # Make entire build directory available
+    # for the deploy portion of the job
+    paths:
+      - ./build
+
+deploy-job:
+  tags:
+    - runner350
+  stage: deploy
+  script:
+    # Print available items (for debugging)
+    - echo "--------RSYNC PLACEHOLDER--------"    
+    - ls -lah
+    - echo "------------------------"
+    - ls -lah build
+    - echo "------------------------"
+    - ls -lah build/reports
+    - echo "------------------------"
+    - ls -lah build/docs
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$RSYNC_KEY")
+    #- rsync -auvz -e "ssh" build/directoriesToCopy yourLoginName@atria.cs.odu.edu:GitLab1/
+    #    
+    # My rsync commands for this example
+    - rsync -auvz -e "ssh" build/docs tkennedy@atria.cs.odu.edu:./
+    - rsync -auvz -e "ssh" build/reports/findbugs tkennedy@atria.cs.odu.edu:./
+    - rsync -auvz -e "ssh" build/reports/pmd tkennedy@atria.cs.odu.edu:./
+    - rsync -auvz -e "ssh" build/reports/tests tkennedy@atria.cs.odu.edu:./
+    - rsync -auvz -e "ssh" build/reports/*.csv tkennedy@atria.cs.odu.edu:./
+    
+    # Kill the ssh-agent process
+    - ssh-agent -k
