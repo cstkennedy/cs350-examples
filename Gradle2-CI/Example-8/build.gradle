@@ -4,7 +4,7 @@ buildscript {
 
         // Add Dr Zeil's plugin repo
         ivy {
-            url "https://secweb.cs.odu.edu/~zeil/ivyrepo"
+            url 'https://secweb.cs.odu.edu/~zeil/ivyrepo'
         }
     }
     dependencies {
@@ -95,6 +95,14 @@ findbugsMain {
     }
 }
 
+// Add out of curiosity
+findbugsTest {
+    ignoreFailures true
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
 
 pmd {
     ignoreFailures = true

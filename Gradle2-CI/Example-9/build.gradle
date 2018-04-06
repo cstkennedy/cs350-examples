@@ -4,7 +4,12 @@ buildscript {
 
         // Add Dr Zeil's plugin repo
         ivy {
-            url "https://secweb.cs.odu.edu/~zeil/ivyrepo"
+            url 'https://secweb.cs.odu.edu/~zeil/ivyrepo'
+        }
+
+        // Add SpotBugs required repo
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
@@ -13,6 +18,9 @@ buildscript {
         // Add two Buildscript Dependencies
         classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
         classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
+
+        // Add SpotBugs
+        classpath "gradle.plugin.com.github.spotbugs:gradlePlugin:1.6.0" 
 
     }
 }
@@ -33,6 +41,7 @@ apply plugin: "jacoco"
 
 apply plugin: "findbugs"
 apply plugin: "pmd"
+apply plugin: 'com.github.spotbugs'
 
 apply plugin: "checkstyle"
 
@@ -95,6 +104,14 @@ findbugsMain {
     }
 }
 
+// Add out of curiosity
+findbugsTest {
+    ignoreFailures true
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
 
 pmd {
     ignoreFailures = true
@@ -121,6 +138,20 @@ pmd {
         "java-unusedcode"
     ]
 }
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = 'max'
+    reportLevel = 'medium'
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
 
 jacoco {
     toolVersion = "0.8.0"
