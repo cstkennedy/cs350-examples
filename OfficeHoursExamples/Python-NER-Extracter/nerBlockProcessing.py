@@ -31,6 +31,9 @@ Thomas J Kennedy likes Oatmeal raisin cookies!
 <NER>
 Jay Morris likes pizza... and pointers to pizza.
 </NER>
+<NER>
+I, <PER>Thomas Kennedy</PER> am awake and not asleep.. for now.
+</NER>
 """)
 
 def readBlocks():
@@ -170,7 +173,7 @@ def main():
         print(tokens)
         print()
 
-        windows = tokensToWindows(tokens, 3)
+        windows = tokensToWindows(tokens, 2)
         
         for w in windows:
             print(w)

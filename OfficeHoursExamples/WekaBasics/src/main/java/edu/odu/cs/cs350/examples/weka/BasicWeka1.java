@@ -54,35 +54,39 @@ public class BasicWeka1 {
         final int numberOfAttributes = attrInfo.size();
 
         String[] trainingData = {
-                "sunny,85,85,FALSE,no",
-                "sunny,80,90,TRUE,no",
-                "overcast,83,86,FALSE,yes",
-                "rainy,70,96,FALSE,yes",
-                "rainy,68,80,FALSE,yes",
-                "rainy,65,70,TRUE,no",
-                "overcast,64,65,TRUE,yes",
-                "sunny,72,95,FALSE,no",
-                "sunny,69,70,FALSE,yes",
-                "rainy,75,80,FALSE,yes",
-                "sunny,75,70,TRUE,yes",
-                "overcast,72,90,TRUE,yes",
-                "overcast,81,75,FALSE,yes",
-                "rainy,71,91,TRUE,no"
+            "sunny,85,85,FALSE,no",
+            "sunny,80,90,TRUE,no",
+            "overcast,83,86,FALSE,yes",
+            "rainy,70,96,FALSE,yes",
+            "rainy,68,80,FALSE,yes",
+            "rainy,65,70,TRUE,no",
+            "overcast,64,65,TRUE,yes",
+            "sunny,72,95,FALSE,no",
+            "sunny,69,70,FALSE,yes",
+            "rainy,75,80,FALSE,yes",
+            "sunny,75,70,TRUE,yes",
+            "overcast,72,90,TRUE,yes",
+            "overcast,81,75,FALSE,yes",
+            "rainy,71,91,TRUE,no"
         };
 
-        Instances training = new Instances(
-                           "TrainingData", attrInfo, 
-                            trainingData.length);
+        Instances training = new Instances("TrainingData",
+                                           attrInfo, 
+                                           trainingData.length);
+
         training.setClass(play); // Which attribute holds the
                                // class/category that we want
                                // to predict?
 
         for (String sdata: trainingData) {
             String[] values = sdata.split(",");
+
+            // Debugging output
             for (String str : values) {
                 System.out.print(str + "|");
             }
             System.out.println();
+            // End debugging
 
             double[] instanceValues = new double[numberOfAttributes];
 
