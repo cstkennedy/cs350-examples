@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * This is a Brute Force Prime Number Generator. It is intentionally inefficient.
+ * This is a Brute Force Prime Number Generator. It is intentionally
+ * inefficient.
  * <p>
  * There exist far more appropriate methods to identify prime numbers.
  */
@@ -85,7 +86,7 @@ public class BruteForce {
 
     /**
      * Provide an Iterator over the set
-     * of all generated prime numbers
+     * of all generated prime numbers.
      *
      * @return Iterator over the set of prime numbers
      */
