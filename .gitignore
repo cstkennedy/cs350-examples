@@ -12,3 +12,5 @@
 # Eclipse Project Rules
 **/.project
 **/.classpath
+
+**.bak
