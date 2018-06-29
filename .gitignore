@@ -1,5 +1,7 @@
 # Java ignore rules
 **.class
+**.jar
+!**wrapper.jar
 
 # Gradle Ignore rules
 **/build
