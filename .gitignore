@@ -1,17 +1,40 @@
-# Java ignore rules
+# General Ignore Rules
+**/documentation/
+**.o
+**.exe
+**.zip
 **.class
 **.jar
-!**wrapper.jar
+!**gradle/wrapper/*.jar
+**.pyc
 
-# Gradle Ignore rules
-**/build
-**/.gradle
+# Binary Specific Ignore rules
+**/ll2
+**leak.out*
+**storage
+**runShapes
+**runshapes
+**updateRoom
+**registration
+**pointerReview
 
-# Deploy Rules
-**.zip
+**/build/
+**/.gradle/
 
-# Eclipse Project Rules
-**/.project
-**/.classpath
+# Assignment Ignore Rules
+**Assignment-0*
 
+# Eclipse Project Ignore Rules
+**.project
+**.settings
+**.classpath
+
+# Latex Ignore Rules
+**.aux
+
+# Scratch (temp) File & Directory Ignore rules
+Scratch
 **.bak
+
+# Vim rules
+**.swp
