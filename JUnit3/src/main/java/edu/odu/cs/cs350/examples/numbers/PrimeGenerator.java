@@ -43,13 +43,11 @@ public class PrimeGenerator implements Iterable<Integer> {
 
     /**
      * Generate the next prime number.
-     *
-     * @return next prime number as an int
      */
-    public int next()
+    public void next()
     {
         // prime from which to start calculations
-        int nextPrime = primes.get(primes.size() - 1).intValue();
+        int nextPrime = getLast();
 
         // true once a prime number has been identified
         boolean prime = false;
@@ -80,20 +78,26 @@ public class PrimeGenerator implements Iterable<Integer> {
 
         // record the new prime number
         primes.add(Integer.valueOf(nextPrime));
-
-        return nextPrime;
     }
 
     /**
      * Generate the next round of prime numbers.
      *
-     * @param primes number of primes to generate.
-     *
-     * @return a List containing all the prime numbers generated thus far.
+     * @param toGenerate number of primes to generate.
      */
-    List<Integer> nextFew(int primes)
+    public void nextFew(int toGenerate)
     {
-        return null;
+        // TBW
+    }
+
+    /**
+     * Get the last (most recently generated prime).
+     *
+     * @return largest known prime as an int
+     */
+    public int getLast()
+    {
+        return primes.get(primes.size() - 1).intValue();
     }
 
     /**
@@ -108,7 +112,7 @@ public class PrimeGenerator implements Iterable<Integer> {
     }
 
     /**
-     * Return an iterator to the first known prime number
+     * Return an iterator to the first known prime number.
      *
      * @return Iterator over all Integer prime numbers
      */
@@ -138,7 +142,7 @@ public class PrimeGenerator implements Iterable<Integer> {
     }
 
     /**
-     * Compute a hashcode (use the same attributes used by equals)
+     * Compute a hashcode (use the same attributes used by equals).
      */
     @Override
     public int hashCode()
@@ -149,6 +153,7 @@ public class PrimeGenerator implements Iterable<Integer> {
     /**
      * List all generated primes (no specific formatting specified).
      */
+    @Override
     public String toString()
     {
         return "Not Implemented";
