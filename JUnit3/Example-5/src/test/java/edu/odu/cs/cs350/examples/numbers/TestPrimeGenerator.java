@@ -165,9 +165,36 @@ public class TestPrimeGenerator
         assertThat(generator.getPrimes(), equalTo(FIRST_5_PRIMES));
         // ! - mistake in test contains vs equals
 
-        // public Iterator<Integer> iterator()
-        int[] expectedPrimes = new int[]{2, 3, 5, 7, 11};
-        // @todo finsh this test
+        // public Iterator<Integer> iterator() - Causing Problems...
+        // int[] expectedPrimes = new int[]{2, 3, 5, 7, 11};
+        // Iterator<Integer> it = generator.iterator();
+
+        // for (int expectedPrime : expectedPrimes) {
+            // assertTrue(it.hasNext());
+            // assertThat(it.next().intValue(), is(expectedPrime));
+            // it.next(); // This was the issue!
+        // }
+        // assertFalse(it.hasNext());
+
+        // public Iterator<Integer> iterator() - Better... Why?
+        Iterator<Integer> it = generator.iterator();
+
+        assertTrue(it.hasNext());
+        assertThat(it.next().intValue(), is(2));
+
+        assertTrue(it.hasNext());
+        assertThat(it.next().intValue(), is(3));
+
+        assertTrue(it.hasNext());
+        assertThat(it.next().intValue(), is(5));
+
+        assertTrue(it.hasNext());
+        assertThat(it.next().intValue(), is(7));
+
+        assertTrue(it.hasNext());
+        assertThat(it.next().intValue(), is(11));
+
+        assertFalse(it.hasNext());
 
         // public int numberOfPrimes()
         assertThat(generator.numberOfPrimes(), is(5));

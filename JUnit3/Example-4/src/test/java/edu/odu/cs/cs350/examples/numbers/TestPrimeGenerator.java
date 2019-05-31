@@ -13,6 +13,10 @@ import org.hamcrest.core.IsNull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 
 /**
  * 1 - Does this piece of code perform the operations
