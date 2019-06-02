@@ -83,6 +83,8 @@ public class TestPrimeGenerator
 
         aPrime = (primeIt.next()).intValue();
         assertThat(aPrime, is(3));
+
+        assertThat(primeIt.hasNext(), is(false));
     }
 
     @Test
@@ -131,6 +133,8 @@ public class TestPrimeGenerator
 
         aPrime = (primeIt.next()).intValue();
         assertThat(aPrime, is(11));
+
+        assertFalse(primeIt.hasNext());
     }
 
     @Test
@@ -174,7 +178,6 @@ public class TestPrimeGenerator
         assertThat(generator, is(equalTo(seededWith5)));
         assertThat(generator.hashCode(), is(equalTo(seededWith5.hashCode())));
 
-        // public String toString()
         assertThat(generator.toString(), is(equalTo(seededWith5.toString())));
     }
 
@@ -205,7 +208,7 @@ public class TestPrimeGenerator
         assertThat(anotherGenerator.hashCode(),
                    not(equalTo(seededWith5.hashCode())));
 
-        // public String toString()
+        // toString()
         List<String> expectedStrings = expectedPrimes.stream()
                                                        .map(p -> p.toString())
                                                        .collect(toList());
@@ -248,5 +251,4 @@ public class TestPrimeGenerator
      *   d. D.R.Y - Do not Repeat Yourself (i.e., code duplication)
      * 3. What lessons did we learn?
      */
-
 }

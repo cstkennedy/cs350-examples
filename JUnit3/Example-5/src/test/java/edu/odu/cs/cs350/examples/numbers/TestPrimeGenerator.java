@@ -89,6 +89,8 @@ public class TestPrimeGenerator
 
         aPrime = (primeIt.next()).intValue();
         assertThat(aPrime, is(3));
+
+        assertThat(primeIt.hasNext(), is(false));
     }
 
     @Test
@@ -147,6 +149,8 @@ public class TestPrimeGenerator
 
         aPrime = (primeIt.next()).intValue();
         assertThat(aPrime, is(11));
+
+        assertFalse(primeIt.hasNext());
     }
 
     @Test
