@@ -11,12 +11,12 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -60,7 +60,7 @@ public class TestHtmlColor {
         assertThat(color.getRed(), is(7));
         assertThat(color.getGreen(), is(62));
         assertThat(color.getBlue(), is(55));
-        
+
         assertThat(rColor.hashCode(), is(color.hashCode()));
 
         String base16String = String.format(
@@ -68,7 +68,7 @@ public class TestHtmlColor {
             color.getRed(),
             color.getGreen(),
             color.getBlue()).toUpperCase();
-        
+
         assertThat(color.toString(), equalTo(base16String));
     }
 

@@ -7,7 +7,7 @@ public class HtmlColor implements Cloneable{
 
     /**
      * Construct an HTML Color with all
-     * attributes set to 0 (i.e., black, #000000)
+     * attributes set to 0 (i.e., black, #000000).
      */
     public HtmlColor()
     {
@@ -17,7 +17,7 @@ public class HtmlColor implements Cloneable{
     }
 
     /**
-     * Construct an HTML Color 
+     * Construct an HTML Color.
      *
      * @param r red value
      * @param g green value
@@ -31,7 +31,7 @@ public class HtmlColor implements Cloneable{
     }
 
     /**
-     * Retrieve the red component
+     * Retrieve the red component.
      */
     public int getRed()
     {
@@ -39,7 +39,7 @@ public class HtmlColor implements Cloneable{
     }
 
     /**
-     * Set the red component
+     * Set the red component.
      *
      * @param v new value
      *
@@ -51,7 +51,7 @@ public class HtmlColor implements Cloneable{
     }
 
     /**
-     * Retrieve the green component
+     * Retrieve the green component.
      */
     public int getGreen()
     {
@@ -95,7 +95,7 @@ public class HtmlColor implements Cloneable{
      */
     public int hashCode()
     {
-        return (2 * this.red) 
+        return (2 * this.red)
              + (4 * this.green)
              + (8 * this.blue);
     }
