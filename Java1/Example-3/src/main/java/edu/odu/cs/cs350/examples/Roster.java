@@ -4,8 +4,7 @@ import java.util.Set;
 import java.util.LinkedHashSet;
 
 /**
- * A class roster listing all students enrolled
- * in a course
+ * A class roster listing all students enrolled in a course.
  */
 public class Roster implements Cloneable {
     public static final int DEFAULT_MAX_STUDENTS = 10;
@@ -19,7 +18,7 @@ public class Roster implements Cloneable {
      * Create a class roster with a limit
      * of DEFAULT_MAX_STUDENTS `Student`s
      * and the course number set to
-     * "CS 150"
+     * "CS 150".
      */
     public Roster()
     {
@@ -30,11 +29,11 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Create a class roster with a specified 
-     * enrollment limit and course number
+     * Create a class roster with a specified
+     * enrollment limit and course number.
      *
      * @param l enrollment limit
-     * @param c course number 
+     * @param c course number
      */
     public Roster(int l, String c)
     {
@@ -45,7 +44,7 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Retrieve the course number
+     * Retrieve the course number.
      */
     public String getCourseNum()
     {
@@ -53,7 +52,7 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Change the course number
+     * Change the course number.
      *
      * @param n desired course number
      */
@@ -63,7 +62,7 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Retrieve the enrollment limit
+     * Retrieve the enrollment limit.
      */
     public int getEnrollLimit()
     {
@@ -71,7 +70,7 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Change the enrollment limit
+     * Change the enrollment limit.
      *
      * @param n desired limit
      */
@@ -81,12 +80,12 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Attempt to enroll a Student in the course
+     * Attempt to enroll a Student in the course.
      *
-     * Rules: 
+     * Rules:
      *   1- A student can not be added if the enrollment
      *     limit has been reached.
-     *   2- A can not be added to a roster multiple times 
+     *   2- A can not be added to a roster multiple times
      *
      * @param stu Student to enroll
      *
@@ -96,12 +95,12 @@ public class Roster implements Cloneable {
     public boolean enroll(Student stu)
     {
         // limit has been reached
-        if(students.size() == enrollLimit) {
+        if (students.size() == enrollLimit) {
             return false;
         }
 
         // Student was previously added to the roster
-        if(students.contains(stu)) {
+        if (students.contains(stu)) {
             return false;
         }
 
@@ -110,7 +109,7 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Retrieve the number of enrolled students
+     * Retrieve the number of enrolled students.
      */
     public int numEnrolled()
     {
@@ -119,10 +118,10 @@ public class Roster implements Cloneable {
 
     /**
      * Return a collection of students in
-     * the order they were enrolled (added)
+     * the order they were enrolled (added).
      *
      * @return Set of enrolled students. If no students
-     *     have been added to the roster, the set will be 
+     *     have been added to the roster, the set will be
      *     empty.
      */
     public Set<Student> listEnrolledStudents()
@@ -131,14 +130,14 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Compare 2 `Student`s based on name
+     * Compare 2 `Student`s based on name.
      *
      * @param rhs the other (right-hand-side) student object
      */
     @Override
     public boolean equals(Object rhs)
     {
-        if(!(rhs instanceof Roster)) {
+        if (!(rhs instanceof Roster)) {
             return false;
         }
 
@@ -154,13 +153,13 @@ public class Roster implements Cloneable {
 
         if (!this.students.equals(rhsRoster.students)) {
             return false;
-        }        
+        }
 
         return true;
     }
 
     /**
-     * Return a hashcode
+     * Return a hashcode.
      */
     @Override
     public int hashCode()
@@ -191,9 +190,8 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Generate a String containing the course number,
-     * number of enrolled students, enrollment limit, and the names
-     * of all enrolled students.
+     * Generate a String containing the course number, number of enrolled
+     * students, enrollment limit, and the names of all enrolled students.
      */
     @Override
     public String toString()

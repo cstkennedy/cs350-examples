@@ -3,9 +3,14 @@ package edu.odu.cs.cs330.examples;
 import edu.odu.cs.cs350.examples.Student;
 import edu.odu.cs.cs350.examples.Roster;
 
+/**
+ * Demonstrate simple Roster and Student ADTs.
+ */
 class EnrollStudents {
     /**
-     * This is a non-trivial main function 
+     * This is a non-trivial main function.
+     *
+     * @param args not used in this program
      */
     public static void main(String[] args)
     {
@@ -20,7 +25,7 @@ class EnrollStudents {
 
         for (Student s : allStudents) {
 
-            if(cs330.enroll(s)) {
+            if (cs330.enroll(s)) {
                 System.out.println(s + " enrolled in " + cs330.getCourseNum());
             }
             else {
