@@ -13,14 +13,12 @@ buildscript {
         }
     }
     dependencies {
-        classpath "org.ysb33r.gradle:doxygen:0.2"
-
         // Add two Buildscript Dependencies
         classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
         classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
 
         // Add SpotBugs
-        classpath "gradle.plugin.com.github.spotbugs:gradlePlugin:1.6.0" 
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
 
         // Add ShadowJar
         classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
@@ -41,11 +39,8 @@ apply plugin: "java"
 apply plugin: "com.github.johnrengelman.shadow"
 
 apply plugin: "eclipse"
-//apply plugin: "org.ysb33r.doxygen"
-
 apply plugin: "jacoco"
 
-apply plugin: "findbugs"
 apply plugin: "pmd"
 apply plugin: "com.github.spotbugs"
 
@@ -87,7 +82,7 @@ shadowJar {
 test {
     reports {
         html.enabled = true
-    }           
+    }
     ignoreFailures = true
 
     testLogging {
@@ -100,7 +95,7 @@ test {
 }
 
 javadoc {
-    failOnError false    
+    failOnError false
 }
 
 /*
@@ -118,7 +113,7 @@ doxygen {
 /**
  * Run code style/error checks
  */
-findbugsMain {
+spotbugsMain {
     ignoreFailures true
     reports {
         xml.enabled false
@@ -127,7 +122,7 @@ findbugsMain {
 }
 
 // Add out of curiosity
-findbugsTest {
+spotbugsTest {
     ignoreFailures true
     reports {
         xml.enabled false

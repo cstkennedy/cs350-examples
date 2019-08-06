@@ -1,21 +1,21 @@
 package edu.odu.cs.cs350.examples.weka;
 
-import java.util.Set;
-import java.util.LinkedHashSet;
-import java.util.List;
+// import java.util.Set;
+// import java.util.LinkedHashSet;
+// import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import weka.classifiers.Classifier;
+// import weka.classifiers.Classifier;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.functions.supportVector.RBFKernel;
 
-import weka.core.FastVector;
+// import weka.core.FastVector;
 import weka.core.Instances;
 import weka.core.Instance;
 import weka.core.DenseInstance;
 import weka.core.Attribute;
-import weka.core.converters.ConverterUtils.DataSource;
+// import weka.core.converters.ConverterUtils.DataSource;
 
 
 /**
@@ -24,7 +24,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class BasicWeka1 {
     /**
-     * A simple main function
+     * A simple main function.
      *
      * @param args command line arguments
      */
@@ -32,16 +32,16 @@ public class BasicWeka1 {
         throws java.lang.Exception
     {
         String[] outlookNames = {"sunny", "overcast", "rainy"};
-        Attribute outlook = new Attribute("outlook", Arrays.asList(outlookNames)); 
+        Attribute outlook = new Attribute("outlook", Arrays.asList(outlookNames));
 
         Attribute temperature = new Attribute("temperature"); // numeric
         Attribute humidity = new Attribute("humidity"); // numeric
 
         String[] windyNames = {"TRUE", "FALSE"};
-        Attribute windy = new Attribute("windy", Arrays.asList(windyNames)); 
+        Attribute windy = new Attribute("windy", Arrays.asList(windyNames));
 
         String[] playNames = {"yes", "no"};
-        Attribute play = new Attribute("play", Arrays.asList(playNames)); 
+        Attribute play = new Attribute("play", Arrays.asList(playNames));
 
         //FastVector attrInfo = new FastVector();
         ArrayList<Attribute> attrInfo = new ArrayList<Attribute>();
@@ -71,12 +71,12 @@ public class BasicWeka1 {
         };
 
         Instances training = new Instances("TrainingData",
-                                           attrInfo, 
+                                           attrInfo,
                                            trainingData.length);
 
         training.setClass(play); // Which attribute holds the
-                               // class/category that we want
-                               // to predict?
+                                 // class/category that we want
+                                 // to predict?
 
         for (String sdata: trainingData) {
             String[] values = sdata.split(",");

@@ -17,7 +17,7 @@ public class HtmlColor {
     }
 
     /**
-     * Construct an HTML Color 
+     * Construct an HTML Color
      *
      * @param r red value
      * @param g green value
@@ -95,7 +95,7 @@ public class HtmlColor {
      */
     public int hashCode()
     {
-        return (2 * this.red) 
+        return (2 * this.red)
              + (4 * this.green)
              + (8 * this.blue);
     }
