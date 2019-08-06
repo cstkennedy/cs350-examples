@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * Demonstrate how to set up input logic
- * to allow for testing without System.in
+ * to allow for testing without System.in.
  */
 class InputReader
 {
@@ -77,7 +77,7 @@ class InputReader
     }
 
     /**
-     * Read a set of input tokens
+     * Read a set of input tokens.
      */
     public static List<String> readTokens(BufferedReader bReader)
     throws IOException
@@ -86,7 +86,7 @@ class InputReader
 
         Scanner s = new Scanner(bReader);
 
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             String str = s.next();
 
             tokens.add(str);
@@ -95,7 +95,7 @@ class InputReader
     }
 
     /**
-     * Identify whether a token is an HTML or XML style tag
+     * Identify whether a token is an HTML or XML style tag.
      *
      * @param token string to process
      *
