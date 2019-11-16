@@ -1,0 +1,136 @@
+buildscript {
+    repositories {
+        jcenter()
+
+        // Add Dr Zeil's plugin repo
+        ivy {
+            url 'https://secweb.cs.odu.edu/~zeil/ivyrepo'
+        }
+    }
+    dependencies {
+        // Add two Buildscript Dependencies
+        // classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
+        classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
+    }
+}
+
+plugins {
+    id "org.hidetake.ssh" version "2.1.1"
+
+    id "java"
+    id "eclipse"
+
+    id "project-report"
+
+    id "jacoco"
+
+    id "pmd"
+    id "com.github.spotbugs" version "2.0.0"
+    id "checkstyle"
+}
+// Add report task imports
+import edu.odu.cs.zeil.report_accumulator.ReportStats
+import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
+// End report task imports
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
+}
+
+jar {
+    baseName = "RosterExample"
+}
+
+test {
+    reports {
+        html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    jacoco {
+        append = false
+    }
+}
+
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+/**
+ * Run code style/error checks
+ */
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = 'max'
+    reportLevel = 'medium'
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+
+// Check Style Config
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
+
+// Setup Statistics tasks
+task collectStats (type: ReportStats, dependsOn: "build") {
+    reportsURL = "https://www.cs.odu.edu/~tkennedy/examples/cs350/statistics/"
+}
+
+// Deploy csv stats files
+task report (type: ReportsDeploy, dependsOn: "collectStats") {
+    // Test locally on atria
+    deployDestination = "/home/tkennedy/secure_html/examples/cs350/statistics/"
+}
