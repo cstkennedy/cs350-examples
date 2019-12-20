@@ -63,7 +63,7 @@ public class IniDemo
                 }
             }
             catch (org.ini4j.ConfigParser.NoSectionException exc) {
-                // The section does not exist (i.e., somthing weent worng and I
+                // The section does not exist (i.e., something weent worng and I
                 // should handle it.
             }
         }
