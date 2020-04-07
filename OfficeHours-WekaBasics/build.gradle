@@ -4,7 +4,7 @@ buildscript {
 
         // Add Dr Zeil"s plugin repo
         ivy {
-            url "https://secweb.cs.odu.edu/~zeil/ivyrepo"
+            url "https://www.cs.odu.edu/~zeil/ivyrepo"
         }
 
         // Add SpotBugs required repo

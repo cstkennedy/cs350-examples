@@ -1,51 +1,30 @@
 buildscript {
     repositories {
         jcenter()
-
-        // Add Dr Zeil"s plugin repo
-        ivy {
-            url "https://secweb.cs.odu.edu/~zeil/ivyrepo"
-        }
-
-        // Add SpotBugs required repo
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
     }
     dependencies {
-        // Add two Buildscript Dependencies
-        classpath "org.hidetake:gradle-ssh-plugin:2.5.0+"
-        classpath "edu.odu.cs.zeil:report_accumulator:1.2+"
-
-        // Add SpotBugs
-        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
-
         // Add ShadowJar
         classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
 
     }
 }
 
-// Add report task imports
-import edu.odu.cs.zeil.report_accumulator.ReportStats
-import edu.odu.cs.zeil.report_accumulator.ReportsDeploy
-// End report task imports
+plugins {
+    id "org.hidetake.ssh" version "2.1.1"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 
-// And the ssh plugin
-apply plugin: "org.hidetake.ssh"
+    id "java"
+    id "eclipse"
 
-apply plugin: "java"
-//apply plugin: "application"
-apply plugin: "com.github.johnrengelman.shadow"
+    id "project-report"
 
-apply plugin: "eclipse"
-apply plugin: "jacoco"
+    id "jacoco"
 
-apply plugin: "pmd"
-apply plugin: "com.github.spotbugs"
+    id "pmd"
+    id "com.github.spotbugs" version "2.0.0"
+    id "checkstyle"
 
-apply plugin: "checkstyle"
-
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -55,7 +34,7 @@ repositories {
 
     // Add Dr Zeil"s plugin repo
     ivy {
-        url "https://secweb.cs.odu.edu/~zeil/ivyrepo"
+        url "https://www.cs.odu.edu/~zeil/ivyrepo"
     }
 }
 
@@ -103,23 +82,13 @@ javadoc {
     failOnError false
 }
 
-/*
-doxygen {
-    generate_html true
-
-    template "src/documentation.config"
-
-    source new File(projectDir,"src/main/java")
-    //source new File(projectDir,"src/test/java")
-    outputDir new File(buildDir,"docs")
-}
-*/
-
 /**
  * Run code style/error checks
  */
 spotbugsMain {
     ignoreFailures true
+    effort = 'max'
+    reportLevel = 'medium'
     reports {
         xml.enabled false
         html.enabled true
@@ -138,26 +107,11 @@ spotbugsTest {
 pmd {
     ignoreFailures = true
     ruleSets = [
-        "java-basic",
-        "java-braces",
-        //"java-clone",
-        "java-codesize",
-        //"java-comments",
-        //"java-controversial",
-        //"java-coupling",
-        //"java-design",
-        "java-empty",
-        //"java-finalizers",
-        "java-imports",
-        //"java-junit",
-        "java-naming",
-        //"java-optimizations",
-        "java-strictexception",
-        "java-strings",
-        "java-sunsecure",
-        "java-typeresolution",
-        "java-unnecessary",
-        "java-unusedcode"
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
     ]
 }
 
@@ -187,8 +141,6 @@ jacocoTestReport {
     }
 }
 
-
-// Check Style Config
 checkstyle {
     ignoreFailures = true
     showViolations = false
@@ -200,15 +152,3 @@ tasks.withType(Checkstyle) {
     }
 }
 checkstyleTest.enabled = false
-// End Checkstyle config
-
-// Setup Statistics tasks
-task collectStats (type: ReportStats, dependsOn: "build") {
-    reportsURL = "http://www.cs.odu.edu/~tkennedy/examples/cs350/statistics/"
-}
-
-// Deploy csv stats files
-task report (type: ReportsDeploy, dependsOn: "collectStats") {
-    // Test locally on atria
-    deployDestination = "/home/tkennedy/public_html/examples/cs350/statistics/"
-}
