@@ -20,6 +20,8 @@ class WordListDemo
             myWords.add(word);
             System.out.println(word);
         }
+        
+        System.out.println("--------------------------------");
 
         for (String word : WordLists.englishDictionary()) {
             myWords.add(word);
