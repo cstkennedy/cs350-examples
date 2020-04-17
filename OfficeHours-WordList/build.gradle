@@ -5,7 +5,6 @@ buildscript {
     dependencies {
         // Add ShadowJar
         classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
-
     }
 }
 
@@ -62,6 +61,8 @@ jar {
 shadowJar {
     configurations = [project.configurations.compile]
 }
+
+build.dependsOn shadowJar
 
 test {
     reports {
