@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Demonstrate how to set up input logic
  * to allow for testing without System.in.
@@ -120,10 +122,13 @@ class InputReader
     {
         List<String> pruned = new LinkedList<String>();
 
+        /*
         tokens.stream()
             .filter(token -> !isTag(token))
             .forEach(token -> pruned.add(token));
-
-        return pruned;
+        */
+        return tokens.stream()
+            .filter(token -> !isTag(token))
+            .collect(toList());
     }
 }
