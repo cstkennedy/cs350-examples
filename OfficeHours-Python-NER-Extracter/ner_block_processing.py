@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
-class LearningMachine(object):
+
+class LearningMachine:
     """
     Learning Machine Mock
     """
@@ -8,7 +9,7 @@ class LearningMachine(object):
     def LearningMachine(self):
         pass
 
-    def classify(self, featureVector):
+    def classify(self, feature_vector):
         """
         Classify a list of features as containgin a name
         or not containing a name.
@@ -16,7 +17,8 @@ class LearningMachine(object):
         This is a mock. If one of the features represents
         a known name return true
         """
-        for feature in featureVector:
+
+        for feature in feature_vector:
             if feature == 1:
                 return True
 
@@ -36,7 +38,8 @@ I, <PER>Thomas Kennedy</PER> am awake and not asleep.. for now.
 </NER>
 """)
 
-def readBlocks():
+
+def read_blocks():
     """
     Read one input block denoted by <NER> .* </NER>
     """
@@ -46,7 +49,7 @@ def readBlocks():
     for line in BLOCK1.split("\n"):
         line = line.strip()
 
-        #print("->{}<-".format(line))
+        # print("->{}<-".format(line))
 
         if line is None:
             pass
@@ -62,69 +65,72 @@ def readBlocks():
             # Assume well formed input
             block += line
 
-def blockToTokens(rawBlock):
+
+def block_to_tokens(raw_block):
     """
     Take a string input block and
     turn it into tokens by splitting on
     whitespace
 
-    :rawBlock: input block
+    :raw_block: input block
     """
 
-    return rawBlock.split()
+    return raw_block.split()
 
 
-def tokensToWindows(tokens, k):
+def tokens_to_windows(tokens, k):
     """
     Generate all possible windows
     for a given set of tokens
     """
 
-    windows = list()
+    windows = []
 
     for idx, token in enumerate(tokens):
         # print(token, idx)
 
-        window = list()
+        window = []
 
-        for wIdx in range((idx - k), (idx + k + 1)):
-            if wIdx < 0:
+        for w_idx in range((idx - k), (idx + k + 1)):
+            if w_idx < 0:
                 window.append(None)
-            
-            elif wIdx >= len(tokens):
+
+            elif w_idx >= len(tokens):
                 window.append(None)
 
             else:
-                window.append(tokens[wIdx])
+                window.append(tokens[w_idx])
 
         windows.append(window)
 
     return windows
 
-def windowToFeatures(window):
+
+def window_to_features(window):
     """
     @todo add documentation
     """
 
-    windowAsFeatures = list()
+    window_as_features = []
 
     for token in window:
-        windowAsFeatures.extend(tokenToFeatures(token))
+        window_as_features.extend(token_to_features(token))
 
-    return windowAsFeatures
+    return window_as_features
 
-def tokenToFeatures(token):
+
+def token_to_features(token):
     """
     @todo add documentation
     """
-    knownFirstNames = ["Thomas", "Jay"]
-    knownLastNames = ["Kennedy", "Morris"]
+    known_first_names = ["Thomas", "Jay"]
+    known_last_names = ["Kennedy", "Morris"]
 
-    return [
-        1 if token in knownFirstNames else 0,
-        1 if token in knownLastNames else 0]
+    return [1 if token in known_first_names else 0,
+            1 if token in known_last_names else 0]
 
-def pruneWindow(window):
+
+def prune_window(window):
     """
     Remove all None placeholder entries from a window
     """
@@ -132,86 +138,80 @@ def pruneWindow(window):
     return [token for token in window if token is not None]
 
 
-def findFirstNameToken(classifiedWindows):
+def find_first_name_token(classified_windows):
     """
     Given a list of classified windows in the form
     [(True, [token1, token2, ... tokenn])...]
     determine the id of the last token that is part of the name
     """
 
-    # for i, containsNameToken, window in enumerate(reversed(classifiedWindows)):
-    #     if containsName:
-    #         prunedWindow = pruneWindow(window);
+    # for i, contains_name_token, window in enumerate(reversed(classified_windows)):
+    #     if contains_name:
+    #         pruned_window = prune_window(window);
 
     #         return i
 
-    pass
 
-def findLastNameToken(classifiedWindows):
+def find_last_name_token(classified_windows):
     """
     Given a list of classified windows in the form
     [(True, [token1, token2, ... tokenn])...]
     determine the id of the last token that is part of the name
     """
 
-    # for containsNameToken, window in reversed(classifiedWindows):
-    #     if containsName:
-    #         prunedWindow = pruneWindow(window);
+    # for contains_name_token, window in reversed(classified_windows):
+    #     if contains_name:
+    #         pruned_window = prune_window(window);
 
-    #         return len(prunedWindow) - 1
+    #         return len(pruned_window) - 1
 
-    pass
 
 def main():
-    lm = LearningMachine()
+    machine = LearningMachine()
 
-    for block in readBlocks():
-        print(block);
+    for block in read_blocks():
+        print(block)
         print()
 
-        tokens = blockToTokens(block)
+        tokens = block_to_tokens(block)
         print(tokens)
         print()
 
-        windows = tokensToWindows(tokens, 2)
-        
+        windows = tokens_to_windows(tokens, 2)
+
         for w in windows:
             print(w)
 
         for w in windows:
-            featureVector = windowToFeatures(w)
+            feature_vector = window_to_features(w)
 
-            containsName = lm.classify(featureVector)
-            print(str(containsName) + " -> " + str(featureVector))
+            contains_name = machine.classify(feature_vector)
+            print(str(contains_name) + " -> " + str(feature_vector))
 
         print()
 
         for w in windows:
-            print(pruneWindow(w))
+            print(prune_window(w))
 
         print()
-
 
         # Real Work
         print("*" * 80)
 
-        tokens = blockToTokens(block)
-        windows = tokensToWindows(tokens, 2)
+        tokens = block_to_tokens(block)
+        windows = tokens_to_windows(tokens, 2)
 
-
-        classifiedWindows = list()
+        classified_windows = []
 
         for w in windows:
-            featureVector = windowToFeatures(w)
-            containsName = lm.classify(featureVector)
+            feature_vector = window_to_features(w)
+            contains_name = machine.classify(feature_vector)
 
-            classifiedWindows.append((containsName, w))
+            classified_windows.append((contains_name, w))
 
-        print(classifiedWindows)
+        print(classified_windows)
 
-        #print(findFirstNameToken(classifiedWindows))
-
-
+        # print(find_first_name_token(classified_windows))
 
 
 if __name__ == "__main__":
