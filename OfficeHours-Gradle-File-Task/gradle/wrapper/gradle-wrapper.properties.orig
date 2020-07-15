@@ -1,0 +1,10 @@
+#Wed Feb 22 15:34:37 EST 2017
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+<<<<<<< HEAD
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.3-all.zip
+=======
+distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.1-all.zip
+>>>>>>> 6b7cfe5c141143b18646c11360e458c1661e57d8

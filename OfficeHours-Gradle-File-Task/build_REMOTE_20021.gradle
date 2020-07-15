@@ -22,7 +22,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
 }
 
 // Create a new task that can be run using "./gradlew createShellScript"
