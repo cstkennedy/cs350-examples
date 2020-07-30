@@ -1,0 +1,103 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
+
+    implementation "com.cedarsoftware:json-io:4.10.1"
+}
+
+jar {
+    archiveBaseName = "JSON-IO-Writer"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+        )
+    }
+}
+
+run {
+    main = "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+}
+
+application {
+    mainClassName = "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+}
+
+test {
+    reports {
+        html.enabled = true
+    }
+
+    ignoreFailures = true
+}
+
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
