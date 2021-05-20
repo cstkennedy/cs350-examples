@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -14,12 +14,12 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    testCompile "junit:junit:4.12"
-    testCompile "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
 }
 
 

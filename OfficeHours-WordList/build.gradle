@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         // Add ShadowJar
@@ -9,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id "org.hidetake.ssh" version "2.1.1"
+    id "org.hidetake.ssh" version "2.10.1"
     id "com.github.johnrengelman.shadow" version "5.2.0"
 
     id "java"
@@ -20,7 +21,7 @@ plugins {
     id "jacoco"
 
     id "pmd"
-    id "com.github.spotbugs" version "2.0.0"
+    id "com.github.spotbugs" version "4.6.2"
     id "checkstyle"
 
 }
@@ -29,6 +30,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+    mavenCentral()
     jcenter()
 
     // Add Dr Zeil"s plugin repo
@@ -38,10 +40,10 @@ repositories {
 }
 
 dependencies {
-    compile "edu.odu.cs.extract:extract-wordlists:4.2"
+    implementation "edu.odu.cs.extract:extract-wordlists:4.2"
 
-    testCompile "junit:junit:4.12"
-    testCompile "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
 }
 
 
@@ -59,7 +61,7 @@ jar {
 }
 
 shadowJar {
-    configurations = [project.configurations.compile]
+    configurations = [project.configurations.compileClasspath]
 }
 
 build.dependsOn shadowJar
@@ -72,10 +74,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
-    }
-
-    jacoco {
-        append = false
     }
 }
 
