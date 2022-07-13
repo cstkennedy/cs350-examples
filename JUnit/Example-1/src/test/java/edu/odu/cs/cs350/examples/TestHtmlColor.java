@@ -1,7 +1,7 @@
 package edu.odu.cs.cs350.examples;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 1 - Does this piece of code perform the operations

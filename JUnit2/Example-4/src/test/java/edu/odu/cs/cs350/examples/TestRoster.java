@@ -1,25 +1,26 @@
 package edu.odu.cs.cs350.examples;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
-import org.junit.Test;
-import org.junit.Before;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import org.hamcrest.core.IsNull;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestRoster {
     // Students - will not be changed during tests
     Student john  = new Student("John");
@@ -35,7 +36,7 @@ public class TestRoster {
     Roster defaultCourse;
     Roster emptyCS350;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         defaultCourse = new Roster();
@@ -44,7 +45,7 @@ public class TestRoster {
 
     @Test
     public void testDefaultConstructor()
-    {      
+    {
         assertThat(defaultCourse.getCourseNum(), equalTo("CS 150"));
         assertThat(defaultCourse.getEnrollLimit(),
                    equalTo(Roster.DEFAULT_MAX_STUDENTS));
@@ -118,7 +119,7 @@ public class TestRoster {
         assertThat(cs252.toString(), containsString("CS 252"));
         assertThat(cs252.toString(),
                    containsString(Integer.toString(emptyCS350.numEnrolled()))); // mistake
-        assertThat(cs252.toString(), 
+        assertThat(cs252.toString(),
                    containsString(Integer.toString(Roster.DEFAULT_MAX_STUDENTS)));
     }
 
@@ -126,7 +127,7 @@ public class TestRoster {
     public void testSetEnrollLimit()
     {
         assertThat(emptyCS350.getCourseNum(), equalTo("CS 350")); // should be placed after line 130
-        
+
         emptyCS350.setEnrollLimit(2);
 
         assertThat(emptyCS350.getEnrollLimit(), equalTo(2));
@@ -203,7 +204,7 @@ public class TestRoster {
         assertThat(cs725.toString(), containsString("CS 725"));
         assertThat(cs725.toString(),
                    containsString(Integer.toString(cs725.numEnrolled())));
-        assertThat(cs725.toString(), 
+        assertThat(cs725.toString(),
                    containsString(Integer.toString(3)));
 
         assertThat(cs725.toString(), containsString(allStudents[0].toString()));
