@@ -19,4 +19,4 @@ for Python 3:
      The Example Code is located [here](https://github.com/cstkennedy/cs330-examples/tree/master/Review-12-Python3-Shapes).
   2. The Rust recording is available [here](https://youtu.be/NcYwj8Sdxo0). The
      Example Code is located
-     [here](https://git.cs.odu.edu/cstkennedy/rust-shapes-examples).
+     [here](https://github.com/cstkennedy/rust-shapes-examples).
