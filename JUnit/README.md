@@ -2,7 +2,7 @@
 
 > If you are already familiar with the basics of JUnit (e.g., setting up test
 > suites and writing assertions) you may want to skip ahead to [JUnit
-> 2](#junit-2).
+> 2](../JUnit-2).
 
 This is a recorded discussion of how to start a JUnit test suite and the
 general approach to writing unit tests. The focus is on a relatively simple
