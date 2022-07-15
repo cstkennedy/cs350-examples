@@ -1,26 +1,7 @@
 Title: Reviews CS 350
 Author: Thomas J. Kennedy
 TOC: yes
-
-%define <\ExampleZip> <zipFile> {[zipFile](./zipFile)}
-
-# Updates in Progress
-
-I will be updating these reviews throughout the semester. Everything below this
-point may be updated or replaced over the next few weeks.
-
 ---
-
-# SSH Keys
-
-This is a recorded review of the basics of SSH at the command line (i.e.,
-directly using variants of the command `ssh user@host`).
-
-> In my lecture I used `~/public_html` to create my webpage example. You will
-> need to use `~/secure_html` when you reproduce the steps.
-
-The recording is available [here](https://youtu.be/_0u6DVIBS9Q).
-
 
 # Java: An Overview
 
@@ -264,32 +245,6 @@ I placed the final example in a
 [repository](https://forge350.cs.odu.edu/tkennedy/Gradle2-CI) on the CS 350
 Forge. The commit history  shows the changes that occurred in each step.
 
-
-# Gitlab and Continuous Integration
-
-This is a recorded review of updating a Gradle Buildscript and configuring
-Continuous integration in Gitlab. The example repository is available in the
-[350 Forge](https://forge350.cs.odu.edu/tkennedy/Gradle2-CI).
-
-
-The recording is available [here](https://youtu.be/HBMthLTuESg).
-The example material code is available in \ExampleZip{Gradle2-CI.zip}.
-
-
-## CI & Updating Gradle Version
-
-If you are using Gradle 5.6.1 or newer, your `build.gradle` file requires a few
-changes (if you based it on my earlier examples).
-
-\bSidebar
-
-**Due to a few minor technical issues, this video was recorded at 720p (instead
-of 1080p).**
-
-\eSidebar
-
-The recorded review of me migrating from Gradle 3.x/4.x to 5.6.1 is available
-at <https://youtu.be/Dqfz2Z3Rsq0>.
 
 ---
 
