@@ -1,23 +1,12 @@
-Title: Reviews CS 350
-Author: Thomas J. Kennedy
-TOC: yes
----
+This repository contains a series of code examples divided into groups (i.e.,
+*Reviews*). Each *Review* directory includes a `README.md` that:
 
-# Gradle 2
+  - links to recorded lectures
+  - summarizes the focus of each *Example*
 
-\bSidebar
+To obtain a copy of the examples, either:
 
-**This Example is based on Gradle 4 and earlier. This will be updated shortly
-for Gradle 5.6.1, with the new plugin syntax.**
-
-\eSidebar
-
-This is a recorded review of extending a basic _Gradle_ build file for a Java
-application. The discussion covered 3 examples:
-
-  - _Example 1_ - Add FindBugs, PMD, Jacoco, and Javadoc
-     to a Gradle build.
-  - _Example 2_ - Add Checkstyle to the Example 1 Gradle build.
-  - _Example 3_ - Discuss the corrections made based on the
-    Example 2 Checkstyle report
-
+  1. [Download this zip file](https://github.com/cstkennedy/cs350-examples/archive/refs/heads/master.zip)
+  2. [Clone the repository from
+     GitHub](https://github.com/cstkennedy/cs350-examples) and `checkout` the
+     master branch
