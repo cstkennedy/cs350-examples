@@ -1,0 +1,202 @@
+plugins {
+    id "java"
+    id "application"
+
+    id "jacoco"
+    id "org.barfuin.gradle.jacocolog" version "2.0.0"
+
+    id "pmd"
+    id "com.github.spotbugs" version "4.6.2"
+    id "checkstyle"
+    id "project-report"
+
+    id "org.jbake.site" version "5.5.0"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Everything in src/main (production code).
+    // implementation ...
+
+    // Everything in src/test (test code)
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+}
+
+jar {
+    archiveBaseName = "PrimeNumbers"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs350.examples.numbers.RunPrimeGenerator"
+        )
+    }
+}
+
+run {
+    mainClass = "edu.odu.cs.cs350.examples.numbers.RunPrimeGenerator"
+    args = [20]
+}
+
+test {
+    useJUnitPlatform()
+
+    reports {
+        html.required = true
+    }
+
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+//------------------------------------------------------------------------------
+// Documentation Tool(s)
+//------------------------------------------------------------------------------
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tool(s)
+//------------------------------------------------------------------------------
+pmd {
+    toolVersion = "6.21.0"
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+pmdTest {
+    enabled = false
+}
+
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+spotbugsTest {
+    enabled = false
+}
+
+checkstyle {
+    toolVersion "8.42"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+
+checkstyleTest {
+    enabled = false
+}
+
+
+//------------------------------------------------------------------------------
+// Deploy Steps (Convenience Tasks)
+//------------------------------------------------------------------------------
+task reportsAndStuff(dependsOn: [
+    "test",
+    "jacocoTestReport",
+    "checkstyleMain",
+    "javadoc",
+    "check",
+    "spotbugsMain",
+    "projectReport"])
+{
+    description "Generate all reports and documentation for this project."
+}
+
+task copyReports(type: Copy)
+{
+    dependsOn "reportsAndStuff"
+
+    from "build/reports"
+    into "build/tmp/website/assets"
+
+    description "Copy all reports into \"website\" directory."
+}
+
+task copyDocumentation(type: Copy)
+{
+    dependsOn "reportsAndStuff"
+
+    from "build/docs"
+    into "build/tmp/website/assets"
+
+    description "Copy Javadoc output into \"website\" directory."
+}
+
+
+//------------------------------------------------------------------------------
+// JBake Configuration
+//------------------------------------------------------------------------------
+task copyJBakeTemplates(type: Copy)
+{
+    from "src/jbake"
+    into "build/tmp/website"
+}
+
+task doAllTheCopying(dependsOn: [
+    "copyReports",
+    "copyDocumentation",
+    "copyJBakeTemplates"])
+{
+    description "Copy everything into the JBake working directory."
+}
+
+task buildHomePage(dependsOn: copyJBakeTemplates)
+{
+    inputs.files ("build/tmp/website/content/home0.md", "../README.md")
+    outputs.file ("build/tmp/website/content/home.md")
+
+    doLast  {
+        outputs.files.singleFile.withOutputStream { out ->
+            for (file in inputs.files) file.withInputStream {
+                out << it << '\n'
+            }
+        }
+    }
+}
+
+jbake {
+    srcDirName = "build/tmp/website"
+}
+
+task setUpWebsite()
+{
+    dependsOn "buildHomePage"
+    dependsOn "doAllTheCopying"
+}
+
+bake {
+    dependsOn "setUpWebsite"
+}
