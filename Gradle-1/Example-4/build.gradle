@@ -1,0 +1,67 @@
+plugins {
+    id "java"
+    id "application"
+    id "jacoco"
+
+    id "org.barfuin.gradle.jacocolog" version "2.0.0"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Everything in src/main (production code).
+    // implementation ...
+
+    // Everything in src/test (test code)
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+}
+
+jar {
+    archiveBaseName = "PrimeNumbers"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs350.examples.numbers.RunPrimeGenerator"
+        )
+    }
+}
+
+run {
+    mainClass = "edu.odu.cs.cs350.examples.numbers.RunPrimeGenerator"
+    args = [20]
+}
+
+test {
+    useJUnitPlatform()
+
+    reports {
+        html.required = true
+    }
+
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+//------------------------------------------------------------------------------
+// Documentation Tool(s)
+//------------------------------------------------------------------------------
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tool(s)
+//------------------------------------------------------------------------------

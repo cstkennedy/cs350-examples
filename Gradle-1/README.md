@@ -12,10 +12,11 @@ A recorded lecture can be found at <https://youtu.be/hYEMpTh380k>.
 
 # Gradle Part 2
 
-Examples 4 through T.B.D cover adding different plugins to a Gradle build.
+Examples 4 through 6 cover adding different plugins to a Gradle build.
 
-  - Example 4 covers Javadoc.
-  - Example 5 covers SpotBugs and PMD
-  - Example 6 covers Checkstyle
-  - Example 7 covers custom "deploy" tasks.
+  - Example 4 covers Javadoc and Gradle configuration warnings.
+  - Example 5 covers SpotBugs and PMD.
+  - Example 6 covers Checkstyle (along with an impromptu `checkstyle.xml`
+    debugging lesson).
 
+A recorded lecture can be found at <https://youtu.be/dNBIyAfLi8Q>.
