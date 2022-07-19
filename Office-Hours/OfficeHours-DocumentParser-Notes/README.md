@@ -19,7 +19,11 @@ public class DocumentParser
 
     public HTMLDocument parse(Path thePath)
     {
-        return null;
+        HTMLDocument doc = new HTMLDocument(thePath);
+
+        // All the tag extraction and analysis through helper functions.
+
+        return doc;
     }
 
     public void extractAnchors(HTMLDocument theDoc)
@@ -34,5 +38,44 @@ public class DocumentParser
 
 }
 ```
+
+# HTMLDocument & HTMLParser
+
+  1. Create a new HTMLDocument object, passing a path into the constructor.
+
+    ```java
+    HTMLDocument doc = new HTMLDocument("a/directory/a.html");
+    ```
+
+  2. Pass the HTMLDocument (i.e., `doc`) into the `DocumentParser`.
+
+  3. `DocumentParser` extracts all HTML information (anchor tags, image tags,
+     script tag, and link tags).
+
+  4. The extracted information is processed and the results are stored in
+     `HTMLDocument`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
