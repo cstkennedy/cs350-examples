@@ -2,8 +2,9 @@
 
 This discussion covers setting up a basic project site using GitHub pages.
 
-The example repository can be found at <>. The recorded lecture can be found at
-<https://youtu.be/Q0ALGQ6RdHc>.
+The example repository can be found at
+<https://github.com/cstkennedy/Gradle-2-Report-Deploy>. The recorded lecture
+can be found at <https://youtu.be/Q0ALGQ6RdHc>.
 
 
 # Automating Clone & Push
