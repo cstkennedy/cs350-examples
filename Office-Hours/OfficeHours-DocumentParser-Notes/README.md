@@ -42,7 +42,6 @@ public class DocumentParser
 # HTMLDocument & HTMLParser
 
   1. Create a new HTMLDocument object, passing a path into the constructor.
-
     ```java
     HTMLDocument doc = new HTMLDocument("a/directory/a.html");
     ```
