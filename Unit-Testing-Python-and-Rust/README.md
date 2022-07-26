@@ -16,7 +16,7 @@ I recorded two quick (~40 minute) discussions of testing: one for Rust and one
 for Python 3:
 
   1. The Python recording is available [here](https://youtu.be/4eUs22jULI0).
-     The Example Code is located [here](https://github.com/cstkennedy/cs330-examples/tree/master/Review-12-Python3-Shapes).
+     The Example Code is located [here](https://github.com/cstkennedy/cs330-examples/tree/master/Review-06-Python-Shapes).
   2. The Rust recording is available [here](https://youtu.be/NcYwj8Sdxo0). The
      Example Code is located
      [here](https://github.com/cstkennedy/rust-shapes-examples).
