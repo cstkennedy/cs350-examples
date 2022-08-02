@@ -69,10 +69,40 @@ class ExampleJSONWriter
         System.out.println(json);
     }
 
+    /**
+     * Demonstrate nested serialization using extracted data stored in a map.
+     */
+    public static void demoMapSerializationNested(Roster roster)
+    {
+        Map<String, Object> outerLayer = new HashMap<>();
+
+        List<Object> studentEntries = new Vector<>();
+        for (Student stu : roster) {
+            Map<String, Object> studentEntry = new HashMap<>();
+
+            studentEntry.put("name", stu.getName());
+            studentEntry.put("gpa", 4.0);
+
+            studentEntries.add(studentEntry);
+        }
+
+        outerLayer.put(roster.getCourseNum(), studentEntries);
+        outerLayer.put("totalStudents", roster.numEnrolled());
+
+        Map args = new HashMap<>();
+        args.put(JsonWriter.PRETTY_PRINT, true); // Make the output human readable
+        args.put(JsonWriter.TYPE, false); // Hide the type metadata (e.g., Student, Roster)
+
+        String json = JsonWriter.objectToJson(outerLayer, args);
+
+        System.out.println(json);
+    }
+
     public static void main(String... args)
     {
         demoNaiveSerialization(generateRoster());
         System.out.println();
         demoMapSerialization(generateRoster());
+        demoMapSerializationNested(generateRoster());
     }
 }
