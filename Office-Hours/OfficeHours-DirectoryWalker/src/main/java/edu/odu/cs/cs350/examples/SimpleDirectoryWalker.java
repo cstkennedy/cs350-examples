@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+/**
+ * A Simple Directory Walker that collects a list of all files and
+ * sub-directories for a specified directory.
+ */
 public class SimpleDirectoryWalker
 {
     Path directoryToExamine;

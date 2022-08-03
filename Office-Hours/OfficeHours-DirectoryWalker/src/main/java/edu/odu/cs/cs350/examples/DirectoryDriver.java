@@ -25,7 +25,5 @@ public class DirectoryDriver
         for (Path file : wlkr.getDirectoryList()) {
             System.out.format("  - %s%n", file);
         }
-
-
     }
 }
