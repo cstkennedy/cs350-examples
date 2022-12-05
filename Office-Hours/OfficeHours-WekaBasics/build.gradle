@@ -4,13 +4,13 @@ buildscript {
     }
     dependencies {
         // Add ShadowJar
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
+        // classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
     }
 }
 
 plugins {
     id "org.hidetake.ssh" version "2.1.1"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 
     id "java"
     id "eclipse"
@@ -63,7 +63,7 @@ jar {
 }
 
 shadowJar {
-    configurations = [project.configurations.implementation]
+    configurations = [project.configurations.compileClasspath]
 }
 
 build.dependsOn shadowJar
