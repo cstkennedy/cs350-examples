@@ -5,36 +5,65 @@ import java.util.Vector;
 import java.util.Map;
 import java.util.HashMap;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+
 import com.cedarsoftware.util.io.*;
 
-class ExampleJSONWriter
+public class ExampleJSONWriter
 {
+    private Roster roster;
+    private BufferedWriter destination;
+
     /**
-     * Generate a small roster for testing.
+     * Default constructor should never be used. "Disable" it by making it
+     * private.
      */
-    public static Roster generateRoster()
+    private ExampleJSONWriter()
     {
-        Student john  = new Student("John");
-        Student tom   = new Student("Tom");
-        Student jay   = new Student("Jay");
-        Student oscar = new Student("Oscar");
 
-        Student[] allStudents = {john, tom, jay, oscar};
+    }
 
-        Roster cs330 = new Roster(4, "CS 330");
+    /**
+     * If no destination is specified default to standard out (System.out).
+     *
+     * @param src roster to output
+     */
+    public ExampleJSONWriter(final Roster src)
+    {
+        this.roster = src;
+        this.destination = new BufferedWriter(
+            new OutputStreamWriter(System.out)
+        );
+    }
 
-        for (Student s : allStudents) {
-            final boolean enrollResult = cs330.enroll(s);
-        }
+    /**
+     * Output to a specified buffer.
+     *
+     * @param src roster to output
+     * @param buffer location to which data is to be written
+     */
+    public ExampleJSONWriter(final Roster src, BufferedWriter buffer)
+    {
+        this.roster = src;
+        this.destination = buffer;
+    }
 
-        return cs330;
+    /**
+     * Return the roster (data source)
+     */
+    public Roster getSourceData()
+    {
+        return this.roster;
     }
 
     /**
      * Demonstrate naive serialization. By default every field is output using
      * the variable name.
      */
-    public static void demoNaiveSerialization(Roster roster)
+    public void demoNaiveSerialization()
+        throws IOException
     {
         Map args = new HashMap<>();
         args.put(JsonWriter.PRETTY_PRINT, true); // Make the output human readable
@@ -42,13 +71,16 @@ class ExampleJSONWriter
 
         String json = JsonWriter.objectToJson(roster, args);
 
-        System.out.println(json);
+        destination.write(json);
+        destination.write("\n");
+        destination.flush();
     }
 
     /**
      * Demonstrate serialization using extracted data stored in a map.
      */
-    public static void demoMapSerialization(Roster roster)
+    public void demoMapSerialization()
+        throws IOException
     {
         Map<String, Object> customMap = new HashMap<>();
 
@@ -66,13 +98,16 @@ class ExampleJSONWriter
 
         String json = JsonWriter.objectToJson(customMap, args);
 
-        System.out.println(json);
+        destination.write(json);
+        destination.write("\n");
+        destination.flush();
     }
 
     /**
      * Demonstrate nested serialization using extracted data stored in a map.
      */
-    public static void demoMapSerializationNested(Roster roster)
+    public void demoMapSerializationNested()
+        throws IOException
     {
         Map<String, Object> outerLayer = new HashMap<>();
 
@@ -95,14 +130,8 @@ class ExampleJSONWriter
 
         String json = JsonWriter.objectToJson(outerLayer, args);
 
-        System.out.println(json);
-    }
-
-    public static void main(String... args)
-    {
-        demoNaiveSerialization(generateRoster());
-        System.out.println();
-        demoMapSerialization(generateRoster());
-        demoMapSerializationNested(generateRoster());
+        destination.write(json);
+        destination.write("\n");
+        destination.flush();
     }
 }

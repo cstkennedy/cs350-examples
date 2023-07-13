@@ -34,17 +34,17 @@ jar {
 
     manifest {
         attributes(
-            "Main-Class": "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+            "Main-Class": "edu.odu.cs.cs350.examples.Driver"
         )
     }
 }
 
 run {
-    main = "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+    main = "edu.odu.cs.cs350.examples.Driver"
 }
 
 application {
-    mainClass = "edu.odu.cs.cs350.examples.ExampleJSONWriter"
+    mainClass = "edu.odu.cs.cs350.examples.Driver"
 }
 
 test {
