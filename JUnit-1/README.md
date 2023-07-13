@@ -8,6 +8,8 @@ This is a recorded discussion of how to start a JUnit test suite and the
 general approach to writing unit tests. The focus is on a relatively simple
 `HTMLColor` class.
 
+The recording can be accessed at <https://youtu.be/Z5c3dU5R2Fk>
+
 <details>
 
 <summary> *HTMLColor Class* </summary>
