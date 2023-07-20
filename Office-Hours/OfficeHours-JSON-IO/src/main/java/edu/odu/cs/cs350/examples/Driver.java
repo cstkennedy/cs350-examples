@@ -39,6 +39,7 @@ public class Driver
         writer.demoNaiveSerialization();
         System.out.println();
         writer.demoMapSerialization();
+        System.out.println();
         writer.demoMapSerializationNested();
     }
 }

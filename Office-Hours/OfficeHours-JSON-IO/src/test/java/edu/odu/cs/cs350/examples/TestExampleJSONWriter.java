@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is an integration test (by definition).
@@ -198,6 +199,71 @@ public class TestExampleJSONWriter {
                 "]",
                 "totalStudents",
                 "4"
+            )
+        );
+
+        /*
+            # Reference Output
+            {
+              "CS 330":[
+                {
+                  "name":"John",
+                  "gpa":4.0
+                },
+                {
+                  "name":"Tom",
+                  "gpa":4.0
+                },
+                {
+                  "name":"Jay",
+                  "gpa":4.0
+                },
+                {
+                  "name":"Oscar",
+                  "gpa":4.0
+                }
+              ],
+              "totalStudents":4
+            }
+        */
+    }
+
+    @Test
+    public void testMapSerializationNestedButBetter()
+        throws IOException
+    {
+        StringWriter sWriter = new StringWriter();
+        BufferedWriter buffer = new BufferedWriter(sWriter);
+        ExampleJSONWriter writer = new ExampleJSONWriter(roster, buffer);
+
+        writer.demoMapSerializationNested();
+
+        String resultJSON = sWriter.toString();
+
+        // Check basics (e.g., content length)
+        assertThat(resultJSON, is(not(nullValue())));
+        assertThat(resultJSON.length(), is(greaterThan(0)));
+
+        List<String> expected = new ArrayList<>();
+        expected.add("CS 330");
+        expected.add(":");
+        expected.add("[");
+        for (Student stu : allStudents) {
+            expected.add("{");
+            expected.add(stu.getName());
+            expected.add("4.0");
+            expected.add("}");
+        }
+        expected.add("]");
+        expected.add("totalStudents");
+        expected.add("4");
+
+
+        // Check the actual content (e.g., content and order of content)
+        assertThat(
+            resultJSON,
+            stringContainsInOrder(
+                expected
             )
         );
 
