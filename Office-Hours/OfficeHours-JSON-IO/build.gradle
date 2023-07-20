@@ -80,8 +80,8 @@ spotbugsMain {
     reportLevel = "medium"
 
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
@@ -90,9 +90,9 @@ spotbugsTest.enabled = false
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        html.required = true
+        xml.required = true
+        csv.required = true
     }
 }
 

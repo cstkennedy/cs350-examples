@@ -55,18 +55,6 @@ public class TestExampleJSONWriter {
         }
     }
 
-/*
-    {
-        final Roster roster = generateRoster();
-        ExampleJSONWriter writer = new ExampleJSONWriter(roster);
-
-        writer.demoNaiveSerialization();
-        System.out.println();
-        writer.demoMapSerialization();
-        writer.demoMapSerializationNested();
-    }
-   */
-
     @Test
     public void testNaiveSerialization()
         throws IOException
