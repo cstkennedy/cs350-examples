@@ -1,0 +1,112 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "com.github.spotbugs" version "5.0.9"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+
+    implementation "com.cedarsoftware:json-io:4.10.1"
+    implementation 'org.apache.poi:poi:5.2.3+'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3+'
+}
+
+jar {
+    archiveBaseName = "JSON-IO-Writer"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs350.examples.Driver"
+        )
+    }
+}
+
+run {
+    mainClass = "edu.odu.cs.cs350.examples.Driver"
+}
+
+application {
+    mainClass = "edu.odu.cs.cs350.examples.Driver"
+}
+
+test {
+    useJUnitPlatform()
+
+    reports {
+        html.required = true
+    }
+
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
