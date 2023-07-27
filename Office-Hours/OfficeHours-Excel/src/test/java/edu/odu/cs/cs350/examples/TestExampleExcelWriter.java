@@ -134,7 +134,7 @@ public class TestExampleExcelWriter {
 
         // Explicitly check each cell (we know which cells contain String data
         // and which cells contain numeric data)
-        
+
         // Check the header row first
         Cell cell = sheet.getRow(0).getCell(0);
         assertThat(cell.getStringCellValue(), equalTo("Student"));
@@ -161,6 +161,5 @@ public class TestExampleExcelWriter {
         assertThat(cell.getStringCellValue(), equalTo("Oscar"));
         cell = sheet.getRow(4).getCell(1);
         assertThat(cell.getNumericCellValue(), closeTo(4.0, 0.01));
-
     }
 }
