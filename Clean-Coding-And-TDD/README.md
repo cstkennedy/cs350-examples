@@ -1,6 +1,6 @@
 # Clean Coding & Test Driven Development
 
-This discussion will focus on selected examples codes from CS 330
+This discussion will focus on selected example codes from CS 330
 (Object-Oriented Design & Programming). Code examples will include Java,
 Python, and Rust along with tools such as...
 
