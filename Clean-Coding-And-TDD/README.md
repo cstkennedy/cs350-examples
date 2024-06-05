@@ -16,13 +16,13 @@ will be left to separate Gradle discussions.
 
 Our discussion will focus on selected code from the following examples...
 
-  - [Review-00-Foundational-Concepts](https://github.com/cstkennedy/cs330-examples/Review-00-Foundational-Concepts)
-  - [Review-03-Java-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/Review-03-Java-Separation-of-Concerns)
-  - [Review-03-Python-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/Review-03-Python-Separation-of-Concerns)
-  - [Review-03-Rust-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/Review-03-Rust-Separation-of-Concerns)
-  - [Review-04-Java-Unit-Testing](https://github.com/cstkennedy/cs330-examples/Review-04-Java-Unit-Testing)
-  - [Review-04-Python-Unit-Testing](https://github.com/cstkennedy/cs330-examples/Review-04-Python-Unit-Testing)
-  - [Review-10-GuiThread](https://github.com/cstkennedy/cs330-examples/Review-10-GuiThread)
-  - [Review-14-Python-Builder-Pattern](https://github.com/cstkennedy/cs330-examples/Review-14-Python-Builder-Pattern)
-  - [Review-14-Rust-Builder-Pattern](https://github.com/cstkennedy/cs330-examples/Review-14-Rust-Builder-Pattern)
-  - [Review-15-Python-Strategy-Pattern](https://github.com/cstkennedy/cs330-examples/Review-15-Python-Strategy-Pattern)
+  - [Review-00-Foundational-Concepts](https://github.com/cstkennedy/cs330-examples/tree/master/Review-00-Foundational-Concepts)
+  - [Review-03-Java-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/tree/master/Review-03-Java-Separation-of-Concerns)
+  - [Review-03-Python-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/tree/master/Review-03-Python-Separation-of-Concerns)
+  - [Review-03-Rust-Separation-of-Concerns](https://github.com/cstkennedy/cs330-examples/tree/master/Review-03-Rust-Separation-of-Concerns)
+  - [Review-04-Java-Unit-Testing](https://github.com/cstkennedy/cs330-examples/tree/master/Review-04-Java-Unit-Testing)
+  - [Review-04-Python-Unit-Testing](https://github.com/cstkennedy/cs330-examples/tree/master/Review-04-Python-Unit-Testing)
+  - [Review-10-GuiThread](https://github.com/cstkennedy/cs330-examples/tree/master/Review-10-GuiThread)
+  - [Review-14-Python-Builder-Pattern](https://github.com/cstkennedy/cs330-examples/tree/master/Review-14-Python-Builder-Pattern)
+  - [Review-14-Rust-Builder-Pattern](https://github.com/cstkennedy/cs330-examples/tree/master/Review-14-Rust-Builder-Pattern)
+  - [Review-15-Python-Strategy-Pattern](https://github.com/cstkennedy/cs330-examples/tree/master/Review-15-Python-Strategy-Pattern)
