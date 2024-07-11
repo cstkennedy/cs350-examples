@@ -51,7 +51,8 @@ public class TestSimpleHTMLParser
         List<Element> anchors = simple.extractAllTags(htmlSource);
 
         assertThat(anchors, is(notNullValue()));
-        assertThat(anchors.size(), equalTo(1));
+        assertThat(anchors, equalTo(1));
+        assertThat(anchors, hasSize(1));
     }
 
     @Test
@@ -66,6 +67,7 @@ public class TestSimpleHTMLParser
 
         assertThat(anchors, is(notNullValue()));
         assertThat(anchors.size(), equalTo(2));
+        assertThat(anchors, hasSize(2));
     }
 
     @Test
