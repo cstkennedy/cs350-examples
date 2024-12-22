@@ -63,7 +63,7 @@ public class IniDemo
                 }
             }
             catch (org.ini4j.ConfigParser.NoSectionException exc) {
-                // The section does not exist (i.e., something weent worng and I
+                // The section does not exist (i.e., something weent wrong and I
                 // should handle it.
             }
         }
@@ -76,7 +76,7 @@ public class IniDemo
      *
      * @return setting name -> value map/pairs
      *
-     * @throws IOExecption if the ini file could not be opened
+     * @throws IOException if the ini file could not be opened
      */
     public static Map<String, String> loadIniFile(String configFilename)
         throws IOException
