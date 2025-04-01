@@ -34,7 +34,7 @@ public class IniDemo
     /**
      * Examine an Ini file by printing its sections and options.
      * <p>
-     * This function is meant pruely for testing and debugging purposes.
+     * This function is meant purely for testing and debugging purposes.
      *
      * @param configFilename ini file name (with relative path)
      *
