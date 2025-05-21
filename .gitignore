@@ -41,3 +41,7 @@ Scratch
 
 # Rust Rules
 **target
+
+
+# Python Rules
+**uv.lock
