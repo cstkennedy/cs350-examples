@@ -38,3 +38,6 @@ Scratch
 
 # Vim rules
 **.swp
+
+# Rust Rules
+**target
