@@ -1,4 +1,9 @@
-#! /usr/bin/env python3
+"""
+This module contains code snippets used during discussion of tokens and sliding
+windows.
+"""
+
+from typing import Final, Generator
 
 
 class LearningMachine:
@@ -6,10 +11,10 @@ class LearningMachine:
     Learning Machine Mock
     """
 
-    def LearningMachine(self):
+    def LearningMachine(self) -> None:
         pass
 
-    def classify(self, feature_vector):
+    def classify(self, feature_vector: list[int]) -> bool:
         """
         Classify a list of features as containgin a name
         or not containing a name.
@@ -25,8 +30,9 @@ class LearningMachine:
         return False
 
 
-BLOCK1 = (
-"""
+BLOCK1: Final[
+    str
+] = """
 <NER>
 Thomas J Kennedy likes Oatmeal raisin cookies!
 </NER>
@@ -36,10 +42,10 @@ Jay Morris likes pizza... and pointers to pizza.
 <NER>
 I, <PER>Thomas Kennedy</PER> am awake and not asleep.. for now.
 </NER>
-""")
+"""
 
 
-def read_blocks():
+def read_blocks(raw_text: str = BLOCK1) -> Generator[str, None, None]:
     """
     Read one input block denoted by <NER> .* </NER>
     """
@@ -66,7 +72,7 @@ def read_blocks():
             block += line
 
 
-def block_to_tokens(raw_block):
+def block_to_tokens(raw_block: str) -> list[str]:
     """
     Take a string input block and
     turn it into tokens by splitting on
@@ -78,7 +84,7 @@ def block_to_tokens(raw_block):
     return raw_block.split()
 
 
-def tokens_to_windows(tokens, k):
+def tokens_to_windows(tokens: list[str], k: int) -> list[list[str | None]]:
     """
     Generate all possible windows
     for a given set of tokens
@@ -89,7 +95,7 @@ def tokens_to_windows(tokens, k):
     for idx, token in enumerate(tokens):
         # print(token, idx)
 
-        window = []
+        window: list[str | None] = []
 
         for w_idx in range((idx - k), (idx + k + 1)):
             if w_idx < 0:
@@ -106,12 +112,12 @@ def tokens_to_windows(tokens, k):
     return windows
 
 
-def window_to_features(window):
+def window_to_features(window: list[str]) -> list[int]:
     """
     @todo add documentation
     """
 
-    window_as_features = []
+    window_as_features: list[int] = []
 
     for token in window:
         window_as_features.extend(token_to_features(token))
@@ -119,18 +125,20 @@ def window_to_features(window):
     return window_as_features
 
 
-def token_to_features(token):
+def token_to_features(token: str) -> list[int]:
     """
     @todo add documentation
     """
     known_first_names = ["Thomas", "Jay"]
     known_last_names = ["Kennedy", "Morris"]
 
-    return [1 if token in known_first_names else 0,
-            1 if token in known_last_names else 0]
+    return [
+        1 if token in known_first_names else 0,
+        1 if token in known_last_names else 0,
+    ]
 
 
-def prune_window(window):
+def prune_window(window: list[str | None]) -> list[str]:
     """
     Remove all None placeholder entries from a window
     """
@@ -138,7 +146,7 @@ def prune_window(window):
     return [token for token in window if token is not None]
 
 
-def find_first_name_token(classified_windows):
+def find_first_name_token(classified_windows: list[list[str | None]]) -> int:
     """
     Given a list of classified windows in the form
     [(True, [token1, token2, ... tokenn])...]
@@ -152,7 +160,7 @@ def find_first_name_token(classified_windows):
     #         return i
 
 
-def find_last_name_token(classified_windows):
+def find_last_name_token(classified_windows: list[list[str | None]]) -> int:
     """
     Given a list of classified windows in the form
     [(True, [token1, token2, ... tokenn])...]
@@ -166,7 +174,7 @@ def find_last_name_token(classified_windows):
     #         return len(pruned_window) - 1
 
 
-def main():
+def main() -> None:
     machine = LearningMachine()
 
     for block in read_blocks():
@@ -186,7 +194,7 @@ def main():
             feature_vector = window_to_features(w)
 
             contains_name = machine.classify(feature_vector)
-            print(str(contains_name) + " -> " + str(feature_vector))
+            print(f"{contains_name} -> {feature_vector}")
 
         print()
 
