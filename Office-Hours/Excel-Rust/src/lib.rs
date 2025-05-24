@@ -1,6 +1,7 @@
 pub mod error;
 pub mod roster;
 pub mod student;
+pub mod simple_excel_writer;
 
 pub mod prelude {
     pub use crate::roster::Roster;
