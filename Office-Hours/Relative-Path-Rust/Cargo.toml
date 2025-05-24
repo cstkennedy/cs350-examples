@@ -1,0 +1,8 @@
+[package]
+name = "relative_path_rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hamcrest2 = "0.3.0"
+rstest = "0.25.0"
