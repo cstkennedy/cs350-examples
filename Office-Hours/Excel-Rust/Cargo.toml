@@ -7,3 +7,10 @@ edition = "2024"
 eyre = "0.6.12"
 rust_xlsxwriter = "0.87.0"
 thiserror = "2.0.12"
+
+[dev-dependencies]
+calamine = "0.27.0"
+
+# https://github.com/tafia/calamine/pull/506#issue-3064793394
+[patch.crates-io]
+calamine = { git = "https://github.com/prophittcorey/calamine", branch = "fix/zip-3.0" }
