@@ -1,18 +1,19 @@
 package edu.odu.cs.cs350.examples;
 
-import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Scanner;
 
+import static java.util.stream.Collectors.toList;
+
 /**
- * Demonstrate how to set up input logic
- * to allow for testing without System.in
+ * Demonstrate how to set up input logic to allow for testing without
+ * System.in.
  */
 class InputReader
 {
@@ -23,57 +24,50 @@ class InputReader
      * states that the main function does next-to-no work
      * other than maintaining variables and calling other functions.
      *
-     * I amend this rule to include basic input validation
+     * I often amend this rule to include basic input validation
      */
     public static void main(String[] args)
-    throws IOException
+        throws IOException
     {
-        BufferedReader bReader = null;
-
+        //----------------------------------------------------------------------
         // If in main
-        //bReader = selectReaderSource(null);
+        //----------------------------------------------------------------------
+        // BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
 
+        //----------------------------------------------------------------------
         // If in unit test
-        String testInput = "<NER>\n"
-                         + "Thomas J Kennedy likes Oatmeal raisin cookies!\n"
-                         + "</NER>\n"
-                         + "<NER>\n"
-                         + "Jay Morris likes pizza... and pointers to pizza.\n"
-                         + "</NER>\n";
+        //----------------------------------------------------------------------
+        final String testInput = String.join(
+            System.lineSeparator(),
+            "<NER>",
+             "Thomas J Kennedy likes Oatmeal raisin cookies!",
+             "</NER>",
+             "<NER>",
+             "Jay Morris likes pizza... and pointers to pizza.",
+             "</NER>"
+        );
 
-        bReader = selectReaderSource(testInput);
+        final BufferedReader bReader = new BufferedReader(new StringReader(testInput));
 
+        //----------------------------------------------------------------------
         // Remaining logic that works with input
-        List<String> tokens = readTokens(bReader);
+        //----------------------------------------------------------------------
+        final List<String> tokens = readTokens(bReader);
 
         System.out.println("Print one Token per line:");
 
-        for (String token : tokens) {
-            System.out.println("  -> " + token);
+        for (final String token : tokens) {
+            System.out.printf("  -> %s%n", token);
         }
 
-        List<String> pruned = tokensWithTagsRemoved(tokens);
+        final List<String> pruned = tokensWithTagsRemoved(tokens);
 
         System.out.println();
         System.out.println("Print one Pruned Token per line:");
 
-        for (String token : pruned) {
-            System.out.println("  -> " + token);
+        for (final String token : pruned) {
+            System.out.printf("  -> %s%n", token);
         }
-    }
-
-    /**
-     * Set up the Input. If a non-null and non-empty String is passed in
-     * create a BufferedReader around the String. Otherwise create a
-     * BufferedReader around System.in
-     */
-    public static BufferedReader selectReaderSource(String sourceStr)
-    {
-        if (sourceStr == null || sourceStr.isEmpty()) {
-            return new BufferedReader(new InputStreamReader(System.in));
-        }
-
-        return new BufferedReader(new StringReader(sourceStr));
     }
 
     /**
@@ -82,7 +76,7 @@ class InputReader
     public static List<String> readTokens(BufferedReader bReader)
     throws IOException
     {
-        List<String> tokens = new ArrayList<String>();
+        List<String> tokens = new ArrayList<>();
 
         Scanner s = new Scanner(bReader);
 
@@ -103,8 +97,10 @@ class InputReader
      */
     public static boolean isTag(String token)
     {
-        return token.startsWith("<")
-            && token.endsWith(">");
+        // return token.startsWith("<")
+        //     && token.endsWith(">");
+
+        return token.matches("^\\s*<.*>\\s*$");
     }
 
     /**
@@ -116,14 +112,8 @@ class InputReader
      */
     public static List<String> tokensWithTagsRemoved(List<String> tokens)
     {
-        List<String> pruned = new LinkedList<String>();
-
-        for (String token : tokens) {
-            if (!isTag(token)) {
-                pruned.add(token);
-            }
-        }
-
-        return pruned;
+        return tokens.stream()
+            .filter(token -> !isTag(token))
+            .collect(toList());
     }
 }
