@@ -28,7 +28,7 @@ class InputReader
      * I amend this rule to include basic input validation
      */
     public static void main(String[] args)
-    throws IOException
+        throws IOException
     {
         BufferedReader bReader = null;
 
