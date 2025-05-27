@@ -48,4 +48,3 @@ pub fn demo_roster_table(roster: Roster, destination: &str) -> eyre::Result<()> 
 
     Ok(())
 }
-

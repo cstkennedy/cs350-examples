@@ -3,7 +3,6 @@ use enroll_students::prelude::{Roster, Student};
 
 use enroll_students::simple_excel_writer::*;
 
-
 fn main() -> eyre::Result<()> {
     let all_students = [
         Student::new("John"),
@@ -53,4 +52,3 @@ fn enroll_everyone(
 
     (messages, roster)
 }
-

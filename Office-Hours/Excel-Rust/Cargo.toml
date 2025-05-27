@@ -10,6 +10,9 @@ thiserror = "2.0.12"
 
 [dev-dependencies]
 calamine = "0.27.0"
+hamcrest2 = "0.3.0"
+rstest = "0.25.0"
+serde = { version = "1.0.219", features = ["derive"] }
 
 # https://github.com/tafia/calamine/pull/506#issue-3064793394
 [patch.crates-io]
