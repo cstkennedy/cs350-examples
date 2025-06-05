@@ -16,8 +16,8 @@ plugins {
     id "pmd"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -48,70 +48,4 @@ run {
 application {
     mainClass = "edu.odu.cs.cs350.examples.IniDemo"
 }
-
-test {
-    reports {
-        html.enabled = true
-    }
-}
-
-javadoc {
-    failOnError false
-}
-
-//------------------------------------------------------------------------------
-// Analysis Tools
-//------------------------------------------------------------------------------
-
-// SpotBugs
-spotbugsMain {
-    ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
-    reports {
-       xml.enabled = false
-       html.enabled = true
-    }
-}
-
-spotbugsTest.enabled = false
-// End SpotBugs config
-
-jacoco {
-    toolVersion = "0.8.0"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
-}
-
-// Check Style Config
-checkstyle {
-    ignoreFailures = true
-    showViolations = false
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
-    }
-}
-checkstyleTest.enabled = false
-// End Checkstyle config
-
-pmd {
-    ignoreFailures = true
-    ruleSets = [
-        "category/java/bestpractices.xml",
-        "category/java/codestyle.xml",
-        "category/java/design.xml",
-        "category/java/errorprone.xml",
-        "category/java/performance.xml"
-    ]
-}
-
 
