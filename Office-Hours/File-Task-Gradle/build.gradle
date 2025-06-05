@@ -35,7 +35,7 @@ task createShellScript() {
         file("${buildDir}/scripts/desiredName.sh").text = """
 #! /usr/bin/env bash
 
-echo "Rust is a fun programming langauge"
+echo "Rust is a fun programming language"
 """
     }
 }

@@ -1,0 +1,13 @@
+[project]
+name = "file-task-itaskpy"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "taskipy>=1.14.1",
+]
+
+[tool.taskipy.tasks]
+create_script = { cmd = "echo '#! /usr/bin/env bash\necho \"Rust is a fun programming language\"' > desiredName.sh" }
