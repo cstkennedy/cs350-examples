@@ -1,33 +1,10 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
     id "java"
-    id "eclipse"
-
-    id "com.github.spotbugs" version "5.0.9"
-    id "project-report"
-    id "jacoco"
-    id "pmd"
-}
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation "junit:junit:4.12"
 }
 
 // Create a new task that can be run using "./gradlew createShellScript"
 task createShellScript() {
-    description "Creates a shell script"
+    description = "Creates a shell script"
 
     doLast {
         mkdir "${buildDir}/scripts"
