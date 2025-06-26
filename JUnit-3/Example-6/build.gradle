@@ -6,16 +6,17 @@ buildscript {
 
 plugins {
     id "java"
+    id "jvm-test-suite"
 
-    id "com.github.spotbugs" version "5.0.9"
+    id "com.github.spotbugs" version "6.2.1"
     id "project-report"
     id "jacoco"
     id "pmd"
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(11)
-    targetCompatibility = JavaVersion.toVersion(11)
+    sourceCompatibility = JavaVersion.toVersion(17)
+    targetCompatibility = JavaVersion.toVersion(17)
 }
 
 repositories {
@@ -38,11 +39,15 @@ jar {
     }
 }
 
-test {
-    useJUnitPlatform()
-    reports {
-        html.enabled = true
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
     }
+}
+
+test {
     ignoreFailures = true
 
     testLogging {
@@ -52,25 +57,28 @@ test {
 }
 
 jacoco {
-    toolVersion = "0.8.4"
+    toolVersion = "0.8.13"
 }
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        xml.required = true
+        csv.required = true
     }
 }
 
 // SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
 spotbugsMain {
     ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
@@ -78,6 +86,8 @@ spotbugsTest.enabled = false
 // End SpotBugs config
 
 pmd {
+    toolVersion = "7.0.0"
+
     ignoreFailures = true
     ruleSets = [
         "category/java/bestpractices.xml",

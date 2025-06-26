@@ -7,29 +7,33 @@ buildscript {
 plugins {
     id "java"
     id "application"
+    id "jvm-test-suite"
     id "eclipse"
 
     id "checkstyle"
-    id "com.github.spotbugs" version "4.7.1"
+    id "com.github.spotbugs" version "6.2.1"
     id "project-report"
     id "jacoco"
     id "pmd"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.toVersion(17)
+    targetCompatibility = JavaVersion.toVersion(17)
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
 jar {
-    baseName = "CompileSimpleProgram"
+    archiveBaseName = "CompileSimpleProgram"
 
     manifest {
         attributes(
@@ -39,64 +43,90 @@ jar {
 }
 
 run {
-    main = "edu.odu.cs.cs350.examples.CompileSimpleProgram"
+    mainClass = "edu.odu.cs.cs350.examples.CompileSimpleProgram"
     args = ["src/main/resources/testProgram1/KeyboardInput.java"]
 }
 
 application {
-    mainClassName = "edu.odu.cs.cs350.examples.CompileSimpleProgram"
+    mainClass = "edu.odu.cs.cs350.examples.CompileSimpleProgram"
 }
 
-test {
-    reports {
-        html.enabled = true
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
     }
 }
 
+test {
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+}
+
 javadoc {
-    failOnError false
+    failOnError = false
 }
 
 //------------------------------------------------------------------------------
 // Analysis Tools
 //------------------------------------------------------------------------------
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}
 
 // SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
 spotbugsMain {
     ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
 spotbugsTest.enabled = false
 // End SpotBugs config
 
-jacoco {
-    toolVersion = "0.8.0"
-}
+pmd {
+    toolVersion = "7.0.0"
 
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
 }
 
 // Check Style Config
 checkstyle {
+    toolVersion = "10.12.4"
     ignoreFailures = true
     showViolations = false
-    toolVersion = "8.42"
 }
 
 tasks.withType(Checkstyle) {
     reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
+        html.outputLocation = project.file("build/reports/checkstyle/main.html")
     }
 }
 checkstyleTest.enabled = false
@@ -112,5 +142,3 @@ pmd {
         "category/java/performance.xml"
     ]
 }
-
-

@@ -1,57 +1,49 @@
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
-    }
-    dependencies {
-        // Add ShadowJar
-        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.3"
     }
 }
 
 plugins {
-    id "org.hidetake.ssh" version "2.10.1"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
-
     id "java"
+    id "application"
+    id "jvm-test-suite"
     id "eclipse"
 
-    id "project-report"
-
-    id "jacoco"
-
-    id "pmd"
-    id "com.github.spotbugs" version "5.0.9"
     id "checkstyle"
+    id "com.github.spotbugs" version "6.2.1"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
 
+    id "com.gradleup.shadow" version "9.0.0-beta17"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.toVersion(17)
+    targetCompatibility = JavaVersion.toVersion(17)
+}
 
 repositories {
     mavenCentral()
-    jcenter()
+    gradlePluginPortal()
 
-    // Add Dr Zeil"s plugin repo
+    // Add Dr Zeil's plugin repo
     ivy {
-        url "https://www.cs.odu.edu/~zeil/ivyrepo"
+        url = "https://www.cs.odu.edu/~zeil/ivyrepo"
     }
 }
 
 dependencies {
     implementation "edu.odu.cs.extract:extract-wordlists:4.2"
 
-    testImplementation "junit:junit:4.12"
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
-
-// Set main class name
-//mainClassName = "edu.odu.cs.cs350.examples.weka.BasicWeka1"
-
 jar {
-    baseName = "WordListExample"
+    archiveBaseName = "WordListExample"
 
     manifest {
         attributes(
@@ -64,44 +56,90 @@ shadowJar {
     configurations = [project.configurations.compileClasspath]
 }
 
-build.dependsOn shadowJar
+application {
+    mainClass = "edu.odu.cs.cs350.examples.WordListDemo"
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+    }
+}
 
 test {
-    reports {
-        html.enabled = true
-    }
     ignoreFailures = true
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
+
 }
 
 javadoc {
-    failOnError false
+    failOnError = false
 }
 
-/**
- * Run code style/error checks
- */
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}
+
+// SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
 spotbugsMain {
-    ignoreFailures true
-    effort = 'max'
-    reportLevel = 'medium'
+    ignoreFailures = true
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-        xml.enabled false
-        html.enabled true
+       xml.required = false
+       html.required = true
     }
 }
 
-// Add out of curiosity
-spotbugsTest {
-    ignoreFailures true
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+pmd {
+    toolVersion = "7.0.0"
+
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+// Check Style Config
+checkstyle {
+    toolVersion = "10.12.4"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
     reports {
-        xml.enabled false
-        html.enabled true
+        html.outputLocation = project.file("build/reports/checkstyle/main.html")
     }
 }
+checkstyleTest.enabled = false
+// End Checkstyle config
 
 pmd {
     ignoreFailures = true
@@ -113,41 +151,3 @@ pmd {
         "category/java/performance.xml"
     ]
 }
-
-// SpotBugs
-spotbugsMain {
-    ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
-    reports {
-       xml.enabled = false
-       html.enabled = true
-    }
-}
-
-spotbugsTest.enabled = false
-// End SpotBugs config
-
-jacoco {
-    toolVersion = "0.8.0"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
-}
-
-checkstyle {
-    ignoreFailures = true
-    showViolations = false
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
-    }
-}
-checkstyleTest.enabled = false

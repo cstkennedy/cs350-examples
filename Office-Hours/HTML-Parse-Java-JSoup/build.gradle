@@ -6,16 +6,20 @@ buildscript {
 
 plugins {
     id "java"
+    id "application"
+    id "jvm-test-suite"
+    id "eclipse"
 
-    id "com.github.spotbugs" version "5.0.9"
+    id "checkstyle"
+    id "com.github.spotbugs" version "6.2.1"
     id "project-report"
     id "jacoco"
     id "pmd"
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(11)
-    targetCompatibility = JavaVersion.toVersion(11)
+    sourceCompatibility = JavaVersion.toVersion(17)
+    targetCompatibility = JavaVersion.toVersion(17)
 }
 
 repositories {
@@ -30,22 +34,15 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
-/*
-jar {
-    archiveBaseName = "GeneratePrimes"
-
-    manifest {
-        attributes(
-            "Main-Class": "edu.odu.cs.cs350.examples.numbers.RunPrimeGenerator"
-        )
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
     }
 }
-*/
+
 test {
-    useJUnitPlatform()
-    reports {
-        html.enabled = true
-    }
     ignoreFailures = true
 
     testLogging {
@@ -54,31 +51,69 @@ test {
 
 }
 
+javadoc {
+    failOnError = false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
 jacoco {
-    toolVersion = "0.8.4"
+    toolVersion = "0.8.13"
 }
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        xml.required = true
+        csv.required = true
     }
 }
 
 // SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
 spotbugsMain {
     ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
 spotbugsTest.enabled = false
 // End SpotBugs config
+
+pmd {
+    toolVersion = "7.0.0"
+
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+// Check Style Config
+checkstyle {
+    toolVersion = "10.12.4"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.outputLocation = project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
 
 pmd {
     ignoreFailures = true
