@@ -1,3 +1,10 @@
+# Deprecated
+
+This discussion is for Gradle 7.4.2. Refer to the [Recitation - Gradle &
+Git](https://cs.odu.edu/~tkennedy/cs350/latest/Recitation/discussionGradleAndGit/)
+for Gradle 8.14.2.
+
+
 # Adding Integration Tests
 
 This lecture covers adding *Integration Tests* to a gradle build

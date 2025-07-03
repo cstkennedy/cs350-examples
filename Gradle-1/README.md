@@ -1,3 +1,11 @@
+# Deprecated
+
+This discussion is for Gradle 7.4.2. Refer to the [Recitation - Gradle &
+Git](https://cs.odu.edu/~tkennedy/cs350/latest/Recitation/discussionGradleAndGit/)
+for Gradle 8.14.2.
+
+
+
 # Gradle Part 1
 
 This set of examples covers setting up a basic Gradle build for a Java project.
