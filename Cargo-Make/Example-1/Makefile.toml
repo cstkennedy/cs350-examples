@@ -1,0 +1,25 @@
+# This disables all Cargo-Make built-in tasks.
+# This is useful for debugging task naming conflicts
+#
+# [config]
+# skip_core_tasks = true
+
+[tasks.custom-coverage]
+command = "cargo"
+args = ["tarpaulin", "--engine", "llvm", "--ignore-panics", "--no-fail-fast", "--out", "Html"]
+
+[tasks.coverage-flow]
+description = "Runs tests and generates code coverage reports"
+dependencies = ["custom-coverage"]
+
+[tasks.tests-flow]
+description = "Runs all tests"
+dependencies = ["test-flow"]
+
+[tasks.fix]
+command = "cargo"
+args = ["fix"]
+
+[tasks.hygiene-flow]
+description = "Runs formatting and linting tools"
+dependencies = ["format-flow", "clippy-flow", "fix"]
