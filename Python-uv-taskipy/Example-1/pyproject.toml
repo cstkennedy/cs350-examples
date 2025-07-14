@@ -33,4 +33,4 @@ coverage = {cmd = "coverage run --branch -m pytest -v tests && coverage html", h
 
 hygiene_lint = {cmd = "mypy --strict . && ruff check .", help="runs linting tools"}
 hygiene_fmt = {cmd = "mypy --strict . && ruff check .", help="runs formatting tools"}
-hygiene = {cmd = "hygiene_lint && hygiene_fmt", help="runs linting and formatting tools"}
+hygiene = {cmd = "task hygiene_lint && task hygiene_fmt", help="runs linting and formatting tools"}
