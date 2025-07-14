@@ -1,0 +1,36 @@
+[project]
+name = "2025-summer-tuesday-uv"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bs4>=0.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "coverage>=7.9.1",
+    "isort>=6.0.1",
+    "mypy>=1.16.1",
+    "pyhamcrest>=2.1.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.1",
+    "taskipy>=1.14.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+pythonpath = ["."]
+
+[tool.taskipy.tasks]
+test_unit = {cmd = "pytest -ra -v tests", help="runs all unit tests"}
+tests = {cmd = "task test_unit", help="runs all tests"}
+
+coverage = {cmd = "coverage run --branch -m pytest -v tests && coverage html", help="generates HTML coverage report"}
+
+hygiene_lint = {cmd = "mypy --strict . && ruff check .", help="runs linting tools"}
+hygiene_fmt = {cmd = "mypy --strict . && ruff check .", help="runs formatting tools"}
+hygiene = {cmd = "hygiene_lint && hygiene_fmt", help="runs linting and formatting tools"}

@@ -1,0 +1,4 @@
+**.pyc
+uv.lock
+.python-version
+.coverage
