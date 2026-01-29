@@ -1,9 +1,0 @@
-[package]
-name = "input-loop"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-regex = "1.11.1"
-hamcrest2 = "0.3.0"
-rstest = "0.24.0"
