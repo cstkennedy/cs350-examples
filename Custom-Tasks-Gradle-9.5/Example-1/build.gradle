@@ -160,7 +160,7 @@ def customTaskGroup = "Custom"
 
 tasks.register("tests") {
     group = customTaskGroup
-    description "Runs all test suites and generates HTML reports"
+    description = "Runs all test suites and generates HTML reports"
 
     dependsOn("test")
     dependsOn("integrationTest")
@@ -168,14 +168,14 @@ tasks.register("tests") {
 
 tasks.register("coverage") {
     group = customTaskGroup
-    description "Generate HTML test coverage reports"
+    description = "Generate HTML test coverage reports"
 
     dependsOn("tests")
 }
 
 tasks.register("hygiene") {
     group = customTaskGroup
-    description "Run all code analysis, formatting, and linting tools"
+    description = "Run all code analysis, formatting, and linting tools"
 
     dependsOn("pmdMain")
     dependsOn("spotbugsMain")
