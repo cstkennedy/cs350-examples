@@ -1,0 +1,105 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "jvm-test-suite"
+
+    id "jacoco"
+    id "jacoco-report-aggregation"
+    id "org.barfuin.gradle.jacocolog" version "3.1.0"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(21)
+    targetCompatibility = JavaVersion.toVersion(21)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.2"
+}
+
+jar {
+    archiveBaseName = "RunShapes"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs330.examples.RunShapes"
+        )
+    }
+}
+
+run {
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
+    args = ["src/main/resources/inputShapes.txt", "2"]
+}
+
+application {
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
+}
+
+// https://docs.gradle.org/current/userguide/jvm_test_suite_plugin.html#jvm_test_suite_plugin
+testing {
+    suites {
+        configureEach {
+            useJUnitJupiter()
+        }
+
+        test {
+            // configureEach replaced explicit "test" target config
+        }
+
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+                implementation("org.junit.jupiter:junit-jupiter:5.8.2")
+                implementation("org.hamcrest:hamcrest-library:2.2")
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+test {
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+integrationTest {
+    dependsOn test
+
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy integrationTestCodeCoverageReport
+}
+
+// Documentation
+javadoc {
+    failOnError = false
+}

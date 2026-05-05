@@ -1,0 +1,16 @@
+[package]
+name = "room-renovation"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eyre = "0.6.12"
+itertools = "0.14.0"
+log = "0.4.29"
+ordered-float = "5.3.0"
+simple_logger = "5.2.0"
+thiserror = "2.0.18"
+
+[dev-dependencies]
+hamcrest2 = "0.3.0"
+rstest = "0.26.1"
